@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>המדריך המלא של משה לשליטה ב-SEO | Moshe's Complete SEO Domination Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --success: #059669;
+            --warning: #ea580c;
+            --critical: #dc2626;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+            padding-bottom: 80px;
+        }
+
+        .hebrew {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Progress Container */
+        .progress-sticky {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background: var(--bg-subtle);
+            width: 100%;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .progress-info {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .progress-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .progress-stats {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.95;
+            margin: 8px 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        .section {
+            margin: 32px 0;
+            background: white;
+            padding: 28px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin: 0 0 20px;
+            color: var(--primary);
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 24px 0 12px;
+            color: var(--text);
+        }
+
+        /* Task Card */
+        .task {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .task:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .task.critical {
+            border-color: var(--critical);
+            border-width: 3px;
+            background: linear-gradient(to bottom, #fff 0%, #fef2f2 100%);
+        }
+
+        .task.high {
+            border-color: var(--warning);
+            border-width: 3px;
+            background: linear-gradient(to bottom, #fff 0%, #fffbeb 100%);
+        }
+
+        .task.medium {
+            border-color: #7c3aed;
+            border-width: 2px;
+            background: linear-gradient(to bottom, #fff 0%, #f5f3ff 100%);
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .task-checkbox {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .task-checkbox.checked {
+            background: linear-gradient(135deg, var(--success), #047857);
+            border-color: var(--success);
+            animation: checkPulse 0.5s;
+        }
+
+        @keyframes checkPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .task-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .task-title {
+            flex: 1;
+        }
+
+        .task-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            min-width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 900;
+            margin-right: 12px;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .task-title h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 16px 0;
+            padding: 14px;
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        .task-content {
+            margin-top: 20px;
+        }
+
+        .task-content h4 {
+            font-size: 17px;
+            margin: 20px 0 12px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .task-content p {
+            margin: 12px 0;
+            line-height: 1.8;
+        }
+
+        .task-content ul, .task-content ol {
+            margin: 16px 0;
+            padding-left: 28px;
+        }
+
+        .task-content ul.hebrew, .task-content ol.hebrew {
+            padding-right: 28px;
+            padding-left: 0;
+        }
+
+        .task-content li {
+            margin: 12px 0;
+            line-height: 1.7;
+        }
+
+        .task-content pre {
+            background: var(--bg-subtle);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            border-left: 4px solid var(--primary);
+        }
+
+        .task-content a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .task-content a:hover {
+            border-bottom-color: var(--primary);
+        }
+
+        /* Priority Badge */
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0 4px;
+        }
+
+        .badge-critical {
+            background: var(--critical);
+            color: white;
+        }
+
+        .badge-high {
+            background: var(--warning);
+            color: white;
+        }
+
+        .badge-medium {
+            background: #7c3aed;
+            color: white;
+        }
+
+        /* Alert Box */
+        .alert {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+
+        .alert-success {
+            background: linear-gradient(to right, #ecfdf5, #d1fae5);
+            border-color: var(--success);
+        }
+
+        .alert-warning {
+            background: linear-gradient(to right, #fffbeb, #fef3c7);
+            border-color: var(--warning);
+        }
+
+        .alert-critical {
+            background: linear-gradient(to right, #fef2f2, #fecaca);
+            border-color: var(--critical);
+        }
+
+        .alert-info {
+            background: linear-gradient(to right, #eff6ff, #dbeafe);
+            border-color: var(--primary);
+        }
+
+        .alert-title {
+            font-weight: 900;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Term Explanation */
+        .term {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+        }
+
+        .term-title {
+            font-weight: 800;
+            color: #0369a1;
+            margin-bottom: 8px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.95;
+            font-weight: 700;
+        }
+
+        /* Phase Banner */
+        .phase-banner {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .phase-banner h2 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .phase-banner p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: 12px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            flex: 1;
+            text-align: center;
+            margin: 0 4px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section {
+                padding: 20px 16px;
+            }
+
+            .task {
+                padding: 20px 16px;
+            }
+
+            .task-number {
+                min-width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 16px;
+            }
+
+            .task-title h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-sticky">
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-info">
+            <div class="progress-text" id="progressText">
+                <span class="hebrew">התקדמות: 0%</span> | Progress: 0%
+            </div>
+            <div class="progress-stats" id="progressStats">
+                <span class="hebrew">0 מתוך 50 משימות</span> | 0 of 50 tasks
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hebrew">🚪 המדריך המלא של משה לשליטה ב-SEO</h1>
+            <h1>MOSHE'S COMPLETE SEO DOMINATION GUIDE</h1>
+            <p class="hebrew" style="margin-top: 20px; font-size: 18px;">מ-0 ל-100+ ביקורות ב-6 חודשים | 540% צמיחה בלידים</p>
+            <p style="font-size: 18px;">From 0 to 100+ Reviews in 6 Months | 540% Lead Growth</p>
+            <p style="margin-top: 16px; opacity: 0.9;">
+                <span class="hebrew">50 משימות | צעד אחר צעד | מעקב התקדמות מלא</span><br>
+                50 Tasks | Step-by-Step | Full Progress Tracking
+            </p>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+
+        <!-- How to Use -->
+        <div class="section">
+            <h2 class="section-title hebrew">📖 איך להשתמש במדריך הזה</h2>
+            <h2 class="section-title">HOW TO USE THIS GUIDE</h2>
+
+            <p class="hebrew"><strong>זה לא רק עוד מסמך - זה תוכנית הפעולה המלאה שלך ל-6 החודשים הקרובים.</strong></p>
+            <p><strong>This isn't just another document - it's your complete action plan for the next 6 months.</strong></p>
+
+            <div class="alert alert-info" style="margin-top: 24px;">
+                <div class="alert-title hebrew">✅ מה תמצא כאן:</div>
+                <div class="alert-title">WHAT YOU'LL FIND HERE:</div>
+                <ul class="hebrew">
+                    <li>50 משימות ממוספרות מ-1 עד 50</li>
+                    <li>כל משימה עם הוראות צעד אחר צעד בעברית ובאנגלית</li>
+                    <li>קישורים ישירים לכל כלי שאתה צריך</li>
+                    <li>הסבר למונחים טכניים בשפה פשוטה</li>
+                    <li>סרגל התקדמות שעוקב אחרי הצלחתך</li>
+                    <li>תיבות סימון לסמן משימות שהושלמו</li>
+                </ul>
+                <ul>
+                    <li>50 numbered tasks from 1 to 50</li>
+                    <li>Every task with step-by-step instructions in Hebrew and English</li>
+                    <li>Direct links to every tool you need</li>
+                    <li>Technical terms explained in simple language</li>
+                    <li>Progress bar tracking your success</li>
+                    <li>Checkboxes to mark completed tasks</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle hebrew">🎯 איך לעבוד עם המדריך:</h3>
+            <h3 class="section-subtitle">HOW TO WORK WITH THIS GUIDE:</h3>
+
+            <ol>
+                <li class="hebrew"><strong>התחל ממשימה 1</strong> - אל תדלג קדימה. המשימות מסודרות לפי חשיבות.</li>
+                <li><strong>Start from Task 1</strong> - Don't skip ahead. Tasks are ordered by importance.</li>
+
+                <li class="hebrew"><strong>סמן את התיבה</strong> כשסיימת משימה - זה שומר את ההתקדמות שלך.</li>
+                <li><strong>Check the box</strong> when you finish a task - this saves your progress.</li>
+
+                <li class="hebrew"><strong>קרא את שתי השפות</strong> - השתמש באנגלית להבנה, בעברית לוידוא.</li>
+                <li><strong>Read both languages</strong> - Use English for understanding, Hebrew for verification.</li>
+
+                <li class="hebrew"><strong>לחץ על הקישורים</strong> - כל קישור נפתח בכרטיסייה חדשה, מוכן לשימוש.</li>
+                <li><strong>Click the links</strong> - Every link opens in a new tab, ready to use.</li>
+
+                <li class="hebrew"><strong>תתקדם בקצב שלך</strong> - חלק מהמשימות יקחו 5 דקות, אחרות שעה.</li>
+                <li><strong>Progress at your own pace</strong> - Some tasks take 5 minutes, others take an hour.</li>
+            </ol>
+
+            <div class="stats-grid" style="margin-top: 32px;">
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label hebrew">חודשים</span>
+                    <span class="stat-label">Months</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label hebrew">משימות</span>
+                    <span class="stat-label">Tasks</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">540%</span>
+                    <span class="stat-label hebrew">צמיחה בלידים</span>
+                    <span class="stat-label">Lead Growth</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">$60K+</span>
+                    <span class="stat-label hebrew">רווח נוסף</span>
+                    <span class="stat-label">Extra Profit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 1: Week 1 - Critical Foundation -->
+        <div class="phase-banner">
+            <h2 class="hebrew">🔥 שלב 1: שבוע 1 - היסודות הקריטיים</h2>
+            <h2>PHASE 1: WEEK 1 - CRITICAL FOUNDATION</h2>
+            <p class="hebrew">5 משימות קריטיות | 2 שעות סך הכל | תוצאות מיידיות ב-30 יום</p>
+            <p>5 Critical Tasks | 2 Hours Total | Immediate Results in 30 Days</p>
+        </div>
+
+        <!-- Task 1 -->
+        <div class="task critical" id="task1" data-task="task1">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task1')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">1</span>
+                        <span class="hebrew">הגש בקשה ל-Google Local Service Ads</span>
+                    </h3>
+                    <h3>Apply for Google Local Service Ads</h3>
+                    <span class="badge badge-critical">CRITICAL קריטי</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 30 דקות | min</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: קל | Easy</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה Google Local Service Ads (LSA)?</div>
+                    <div class="term-title">WHAT IS Google Local Service Ads (LSA)?</div>
+                    <p class="hebrew">זה פרסומות של גוגל שמופיעות <strong>מעל כל התוצאות האחרות</strong> - אפילו מעל המפה. יש להן תג ירוק "Google Guaranteed" שאומר ללקוחות שגוגל בדק אותך ואתה אמין. <strong>אתה משלם רק כשמישהו מתקשר אליך.</strong></p>
+                    <p>These are Google ads that appear <strong>ABOVE all other results</strong> - even above the map. They have a green "Google Guaranteed" badge that tells customers Google has vetted you and you're trustworthy. <strong>You only pay when someone calls you.</strong></p>
+                </div>
+
+                <h4 class="hebrew">למה זה המשימה הכי חשובה:</h4>
+                <h4>Why This is THE Most Important Task:</h4>
+                <p class="hebrew">כשמישהו מחפש "תיקון דלת מוסך שרלוט" בגוגל, העסק שלך יופיע <strong>במקום הראשון לחלוטין</strong>. המתחרים השלושה הגדולים שלך כבר עושים את זה. אם אתה לא שם, אתה מפסיד 15-25 לידים בחודש.</p>
+                <p>When someone searches "garage door repair charlotte" on Google, your business will appear in the <strong>ABSOLUTE FIRST position</strong>. Your top three competitors are already doing this. If you're not there, you're losing 15-25 leads per month.</p>
+
+                <div class="alert alert-success">
+                    <div class="alert-title hebrew">🎁 מה אתה מקבל:</div>
+                    <div class="alert-title">WHAT YOU GET:</div>
+                    <ul class="hebrew">
+                        <li>מופיע מעל <strong>כל המתחרים</strong></li>
+                        <li>תג "מובטח על ידי Google" ירוק (לקוחות סומכים על זה)</li>
+                        <li>משלם <strong>רק כשמישהו מתקשר</strong> (לא כמו פרסומות רגילות)</li>
+                        <li>15-25 לידים בחודש = $4,500-$20,000 בהכנסות!</li>
+                    </ul>
+                    <ul>
+                        <li>Appear above <strong>ALL competitors</strong></li>
+                        <li>Green "Google Guaranteed" badge (customers trust this)</li>
+                        <li>Pay <strong>only when someone calls</strong> (unlike regular ads)</li>
+                        <li>15-25 leads per month = $4,500-$20,000 in revenue!</li>
+                    </ul>
+                </div>
+
+                <h4 class="hebrew">📋 מה לעשות בדיוק (צעד אחר צעד):</h4>
+                <h4>EXACTLY WHAT TO DO (Step-by-Step):</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">לך לאתר:</span> Go to:</p>
+                <p style="margin: 12px 0;"><a href="https://ads.google.com/local-services" target="_blank">👉 https://ads.google.com/local-services</a></p>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">לחץ על הכפתור הגדול "Get Started" (התחל)</span> Click the big "Get Started" button</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">מלא פרטים:</span> Fill in details:</p>
+                <ul class="hebrew">
+                    <li><strong>סוג עסק:</strong> בחר "Garage Door Repair" (תיקון דלתות מוסך)</li>
+                    <li><strong>מיקום:</strong> Charlotte, NC</li>
+                    <li><strong>טלפון:</strong> (704) 885-2041</li>
+                </ul>
+                <ul>
+                    <li><strong>Business type:</strong> Choose "Garage Door Repair"</li>
+                    <li><strong>Location:</strong> Charlotte, NC</li>
+                    <li><strong>Phone:</strong> (704) 885-2041</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">תהיה מוכן עם המסמכים האלה:</span> Have these documents ready:</p>
+                <ul class="hebrew">
+                    <li>רישיון קבלן מצפון קרוליינה (NC contractor license)</li>
+                    <li>תעודת ביטוח (Insurance certificate)</li>
+                    <li>רשימת הטכנאים שלך (שמות ואימיילים)</li>
+                    <li>פרטי חשבון בנק (לתשלום לגוגל)</li>
+                </ul>
+                <ul>
+                    <li>North Carolina contractor license</li>
+                    <li>Insurance certificate</li>
+                    <li>List of your technicians (names and emails)</li>
+                    <li>Bank account details (to pay Google)</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">העלה את המסמכים</span> Upload the documents</p>
+                <p class="hebrew">גוגל יבקש סריקות או תמונות ברורות. השתמש במצלמת הטלפון שלך.</p>
+                <p>Google will ask for scans or clear photos. Use your phone camera.</p>
+
+                <p><strong class="hebrew">שלב 6:</strong> <strong>Step 6:</strong> <span class="hebrew">חכה לבדיקת רקע</span> Wait for background check</p>
+                <p class="hebrew">כל טכנאי יקבל אימייל לבדיקת רקע. לוקח 3-7 ימים.</p>
+                <p>Each technician gets a background check email. Takes 3-7 days.</p>
+
+                <p><strong class="hebrew">שלב 7:</strong> <strong>Step 7:</strong> <span class="hebrew">קבל אישור ב-2-3 שבועות</span> Get approved in 2-3 weeks</p>
+                <p class="hebrew">גוגל ישלח אימייל אישור. הפרסומות שלך יעלו לאוויר. <strong>הטלפון יתחיל לצלצל! 📞</strong></p>
+                <p>Google will send approval email. Your ads go live. <strong>The phone starts ringing! 📞</strong></p>
+
+                <div class="alert alert-critical">
+                    <div class="alert-title hebrew">🚨 טעויות נפוצות - אל תעשה את אלה!</div>
+                    <div class="alert-title">COMMON MISTAKES - DON'T DO THESE!</div>
+                    <ul class="hebrew">
+                        <li>❌ "אני אעשה את זה מחר" - <strong>לא! תעשה היום!</strong></li>
+                        <li>❌ להעלות תמונות מטושטשות - צלם תמונות ברורות עם הטלפון</li>
+                        <li>❌ לא לענות מהר לשיחות - גוגל עוקב! תענה תוך 60 שניות</li>
+                        <li>❌ לשלם על לידים רעים - אפשר לערער ולקבל החזר כספי</li>
+                    </ul>
+                    <ul>
+                        <li>❌ "I'll do it tomorrow" - <strong>NO! Do it TODAY!</strong></li>
+                        <li>❌ Uploading blurry photos - Take clear photos with your phone</li>
+                        <li>❌ Not answering calls fast - Google tracks this! Answer within 60 seconds</li>
+                        <li>❌ Paying for bad leads - You can dispute and get refunded</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-success" style="margin-top: 20px;">
+                    <div class="alert-title hebrew">✅ זה מה שקורה אחרי שסיימת:</div>
+                    <div class="alert-title">THIS IS WHAT HAPPENS AFTER YOU FINISH:</div>
+                    <p class="hebrew"><strong>תוך 30 יום:</strong> 5-10 שיחות נוספות בשבוע</p>
+                    <p><strong>Within 30 days:</strong> 5-10 more calls per week</p>
+                    <p class="hebrew"><strong>תוך 60 יום:</strong> 15-20 לידים חדשים בחודש</p>
+                    <p><strong>Within 60 days:</strong> 15-20 new leads per month</p>
+                    <p class="hebrew"><strong>תוך 90 יום:</strong> $5,000-$15,000 הכנסות נוספות בחודש!</p>
+                    <p><strong>Within 90 days:</strong> $5,000-$15,000 extra revenue per month!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task critical" data-task="task2">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task2')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">2</span>
+                        <span class="hebrew">העלה 20 תמונות ל-Google Business Profile</span>
+                    </h3>
+                    <h3>Upload 20 Photos to Google Business Profile</h3>
+                    <span class="badge badge-critical">CRITICAL קריטי</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 45 דקות | min</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: מאוד קל | Super Easy</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה Google Business Profile (GBP)?</div>
+                    <div class="term-title">WHAT IS Google Business Profile (GBP)?</div>
+                    <p class="hebrew">זה הכרטיס שמופיע בגוגל כשמישהו מחפש את העסק שלך. כולל שם, כתובת, טלפון, שעות, תמונות וביקורות. <strong>עסקים עם 30+ תמונות מקבלים 42% יותר שיחות!</strong></p>
+                    <p>This is the card that appears in Google when someone searches for your business. Includes name, address, phone, hours, photos and reviews. <strong>Businesses with 30+ photos get 42% more calls!</strong></p>
+                </div>
+
+                <h4 class="hebrew">למה תמונות כל כך חשובות:</h4>
+                <h4>Why Photos Are So Important:</h4>
+                <p class="hebrew">לקוחות רוצים לראות למי הם מתקשרים. תמונות של המשאית שלך, הצוות שלך, והעבודות שלך בונות אמון. <strong>יותר תמונות = יותר אמון = יותר שיחות = יותר כסף.</strong></p>
+                <p>Customers want to see who they're calling. Photos of your truck, your team, and your work build trust. <strong>More photos = more trust = more calls = more money.</strong></p>
+
+                <h4 class="hebrew">📸 איזה תמונות לצלם:</h4>
+                <h4>WHICH PHOTOS TO TAKE:</h4>
+
+                <p><strong class="hebrew">5 תמונות של המשאית:</strong></p>
+                <p><strong>5 Truck Photos:</strong></p>
+                <ul class="hebrew">
+                    <li>המשאית Shield Garage Doors שלך</li>
+                    <li>תוודא שהיא נקייה (שטוף אותה אם מלוכלכת!)</li>
+                    <li>צלם מזוויות שונות</li>
+                    <li>וודא שהלוגו נראה ברור</li>
+                </ul>
+                <ul>
+                    <li>Your Shield Garage Doors truck</li>
+                    <li>Make sure it's clean (wash it if dirty!)</li>
+                    <li>Take from different angles</li>
+                    <li>Make sure logo is clearly visible</li>
+                </ul>
+
+                <p><strong class="hebrew">10 תמונות לפני/אחרי:</strong></p>
+                <p><strong>10 Before/After Photos:</strong></p>
+                <ul class="hebrew">
+                    <li>דלת שבורה → דלת מתוקנת</li>
+                    <li>קפיץ ישן וחלוד → קפיץ חדש ומבריק</li>
+                    <li>מסילה עקומה → מסילה ישרה</li>
+                    <li>לקוחות אוהבים לראות את ההבדל!</li>
+                </ul>
+                <ul>
+                    <li>Broken door → Fixed door</li>
+                    <li>Old rusty spring → New shiny spring</li>
+                    <li>Crooked track → Straight track</li>
+                    <li>Customers love seeing the difference!</li>
+                </ul>
+
+                <p><strong class="hebrew">3 תמונות של הצוות:</strong></p>
+                <p><strong>3 Team Photos:</strong></p>
+                <ul class="hebrew">
+                    <li>אתה במדים</li>
+                    <li>הטכנאים שלך</li>
+                    <li>כולם מחייכים (בלי פרצופים זועפים!)</li>
+                </ul>
+                <ul>
+                    <li>You in uniform</li>
+                    <li>Your technicians</li>
+                    <li>Everyone smiling (no grumpy faces!)</li>
+                </ul>
+
+                <p><strong class="hebrew">2 תמונות של מוצרים:</strong></p>
+                <p><strong>2 Product Photos:</strong></p>
+                <ul class="hebrew">
+                    <li>פותחני LiftMaster שאתה מתקין</li>
+                    <li>דלתות מוסך חדשות שאתה מוכר</li>
+                </ul>
+                <ul>
+                    <li>LiftMaster openers you install</li>
+                    <li>New garage doors you sell</li>
+                </ul>
+
+                <h4 class="hebrew">📋 איך להעלות (אופציה א' - בטלפון - הכי קל):</h4>
+                <h4>HOW TO UPLOAD (Option A - On Phone - Easiest):</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">הורד את האפליקציה:</span> Download the app:</p>
+                <ul class="hebrew">
+                    <li>iPhone: חפש "Google Business Profile" ב-App Store</li>
+                    <li>Android: חפש "Google Business Profile" ב-Google Play</li>
+                </ul>
+                <ul>
+                    <li>iPhone: Search "Google Business Profile" in App Store</li>
+                    <li>Android: Search "Google Business Profile" in Google Play</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">התחבר עם חשבון Google של Shield Garage Doors</span> Log in with Shield Garage Doors Google account</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">הקש על "Photos" בתחתית המסך</span> Tap "Photos" at the bottom</p>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">הקש על כפתור "+"</span> Tap the "+" button</p>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">צלם תמונות חדשות או בחר מהגלריה</span> Take new photos OR choose from gallery</p>
+
+                <p><strong class="hebrew">שלב 6:</strong> <strong>Step 6:</strong> <span class="hebrew">הקש "Done" (סיום)</span> Tap "Done"</p>
+
+                <p><strong class="hebrew">שלב 7:</strong> <strong>Step 7:</strong> <span class="hebrew">חזור על התהליך עד 20 תמונות</span> Repeat until you have 20 photos</p>
+
+                <h4 class="hebrew">📋 אופציה ב' - במחשב:</h4>
+                <h4>Option B - On Computer:</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">לך לאתר:</span> Go to:</p>
+                <p><a href="https://business.google.com" target="_blank">👉 https://business.google.com</a></p>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">לחץ על "Shield Garage Doors"</span> Click on "Shield Garage Doors"</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">לחץ "Photos" בתפריט השמאלי</span> Click "Photos" in left menu</p>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">לחץ "Add Photos" (הוסף תמונות)</span> Click "Add Photos"</p>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">בחר קבצים מהמחשב</span> Choose files from computer</p>
+
+                <p><strong class="hebrew">שלב 6:</strong> <strong>Step 6:</strong> <span class="hebrew">לחץ "Upload" (העלה)</span> Click "Upload"</p>
+
+                <div class="alert alert-warning">
+                    <div class="alert-title hebrew">⚡ טיפ מקצועי - שמות קבצים:</div>
+                    <div class="alert-title">PRO TIP - File Names:</div>
+                    <p class="hebrew">לפני שמעלה תמונות במחשב, תקרא להן ככה:</p>
+                    <p>Before uploading photos on computer, name them like this:</p>
+                    <ul class="hebrew">
+                        <li><code>garage-door-repair-charlotte-shield-01.jpg</code></li>
+                        <li><code>spring-repair-before-after-charlotte.jpg</code></li>
+                        <li><code>shield-truck-huntersville-nc.jpg</code></li>
+                    </ul>
+                    <ul>
+                        <li><code>garage-door-repair-charlotte-shield-01.jpg</code></li>
+                        <li><code>spring-repair-before-after-charlotte.jpg</code></li>
+                        <li><code>shield-truck-huntersville-nc.jpg</code></li>
+                    </ul>
+                    <p class="hebrew"><strong>למה?</strong> גוגל קורא שמות קבצים. זה עוזר ב-SEO!</p>
+                    <p><strong>Why?</strong> Google reads file names. This helps with SEO!</p>
+                </div>
+
+                <div class="alert alert-critical">
+                    <div class="alert-title hebrew">🚨 טעויות תמונות - אל תעשה!</div>
+                    <div class="alert-title">PHOTO MISTAKES - DON'T DO!</div>
+                    <ul class="hebrew">
+                        <li>❌ תמונות מטושטשות - אף אחד לא סומך על עסק מטושטש</li>
+                        <li>❌ תמונות כהות מהלילה - צלם ביום!</li>
+                        <li>❌ תמונות של דברים אקראיים - רק דלתות מוסך</li>
+                        <li>❌ אותה תמונה 10 פעמים - גוגל שונא כפילויות</li>
+                    </ul>
+                    <ul>
+                        <li>❌ Blurry photos - No one trusts a blurry business</li>
+                        <li>❌ Dark photos from night - Shoot during day!</li>
+                        <li>❌ Photos of random stuff - Only garage doors</li>
+                        <li>❌ Same photo 10 times - Google hates duplicates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 3 -->
+        <div class="task critical" data-task="task3">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task3')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">3</span>
+                        <span class="hebrew">קבל קישור ביקורות ישיר מגוגל</span>
+                    </h3>
+                    <h3>Get Your Direct Google Review Link</h3>
+                    <span class="badge badge-critical">CRITICAL קריטי</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 10 דקות | min</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: קל מאוד | Very Easy</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה קישור ביקורות?</div>
+                    <div class="term-title">WHAT IS A Review Link?</div>
+                    <p class="hebrew">זה קישור מיוחד שגוגל נותן לך שלוקח לקוחות <strong>ישירות לדף הביקורות שלך</strong>. הם לא צריכים לחפש אותך - רק ללחוץ ולכתוב ביקורת. זה הופך את זה מקל פי 10!</p>
+                    <p>This is a special link Google gives you that takes customers <strong>directly to your review page</strong>. They don't need to search for you - just click and write a review. This makes it 10x easier!</p>
+                </div>
+
+                <h4 class="hebrew">למה זה כל כך חשוב:</h4>
+                <h4>Why This Is So Important:</h4>
+                <p class="hebrew">יש לך 60 ביקורות. <strong>המתחרה העליון שלך יש 210.</strong> פער של 150 ביקורות! אתה צריך לסגור את הפער הזה מהר. כל ביקורת = יותר אמון = יותר שיחות.</p>
+                <p>You have 60 reviews. <strong>Your top competitor has 210.</strong> A gap of 150 reviews! You need to close this gap fast. Every review = more trust = more calls.</p>
+
+                <h4 class="hebrew">📋 מה לעשות:</h4>
+                <h4>WHAT TO DO:</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">לך ל:</span> Go to:</p>
+                <p><a href="https://business.google.com" target="_blank">👉 https://business.google.com</a></p>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">לחץ על "Shield Garage Doors"</span> Click on "Shield Garage Doors"</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">חפש "Get more reviews" או "Share review form"</span> Look for "Get more reviews" or "Share review form"</p>
+                <ul class="hebrew">
+                    <li>תמצא את זה בצד שמאל תחת "Home" או "Customers"</li>
+                </ul>
+                <ul>
+                    <li>You'll find it on the left side under "Home" or "Customers"</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">העתק את הקישור</span> Copy the link</p>
+                <p class="hebrew">הקישור נראה ככה:</p>
+                <p>The link looks like this:</p>
+                <pre>https://g.page/r/ABC123XYZ/review</pre>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">עשה אותו קצר יותר ב-bit.ly</span> Make it shorter with bit.ly</p>
+                <p><span class="hebrew">לך ל:</span> Go to: <a href="https://bit.ly" target="_blank">https://bit.ly</a></p>
+                <ul class="hebrew">
+                    <li>הדבק את הקישור הארוך</li>
+                    <li>לחץ "Shorten"</li>
+                    <li>תקבל משהו כמו: <code>bit.ly/shield-review</code></li>
+                </ul>
+                <ul>
+                    <li>Paste your long link</li>
+                    <li>Click "Shorten"</li>
+                    <li>You get something like: <code>bit.ly/shield-review</code></li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 6:</strong> <strong>Step 6:</strong> <span class="hebrew">שמור את הקישור בכל מקום:</span> Save this link EVERYWHERE:</p>
+                <ul class="hebrew">
+                    <li>בהערות הטלפון שלך</li>
+                    <li>בחתימת האימייל שלך</li>
+                    <li>בתבניות SMS</li>
+                    <li>תדפיס ותדביק על לוח הרכב</li>
+                </ul>
+                <ul>
+                    <li>In your phone notes</li>
+                    <li>In your email signature</li>
+                    <li>In SMS templates</li>
+                    <li>Print and stick on vehicle dashboard</li>
+                </ul>
+
+                <div class="alert alert-success">
+                    <div class="alert-title hebrew">📱 הודעת SMS להעתקה (שלח אחרי כל עבודה!):</div>
+                    <div class="alert-title">TEXT MESSAGE TO COPY (Send after EVERY job!):</div>
+                    <pre class="hebrew">היי [שם]! תודה שבחרת ב-Shield Garage Doors! 🚪
+
+נשמח למשוב שלך:
+👉 bit.ly/shield-review
+
+הביקורת שלך עוזרת למשפחות מקומיות.
+
+- משה
+(704) 885-2041</pre>
+                    <pre>Hi [Name]! Thanks for choosing Shield Garage Doors! 🚪
+
+We'd love your feedback:
+👉 bit.ly/shield-review
+
+Your review helps local families.
+
+- Moshe
+(704) 885-2041</pre>
+                </div>
+
+                <h4 class="hebrew">🎯 תוכנית: מ-60 ל-100 ביקורות ב-90 יום</h4>
+                <h4>PLAN: From 60 to 100 Reviews in 90 Days</h4>
+                <ul class="hebrew">
+                    <li>צריך: 3-4 ביקורות חדשות בשבוע</li>
+                    <li>איך: שלח את הקישור לכל לקוח באותו יום</li>
+                    <li>מעקב: אחרי 3 ימים, שלח תזכורת נימוסה</li>
+                </ul>
+                <ul>
+                    <li>Need: 3-4 new reviews per week</li>
+                    <li>How: Send link to EVERY customer same day</li>
+                    <li>Follow-up: After 3 days, send polite reminder</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task critical" data-task="task4">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task4')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">4</span>
+                        <span class="hebrew">צור את הפוסט הראשון בגוגל</span>
+                    </h3>
+                    <h3>Create Your First Google Post</h3>
+                    <span class="badge badge-critical">CRITICAL קריטי</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 5 דקות | min</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: קל | Easy</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה Google Posts?</div>
+                    <div class="term-title">WHAT ARE Google Posts?</div>
+                    <p class="hebrew">אלה פוסטים קצרים שמופיעים ב-Google Business Profile שלך. הם כמו <strong>פרסומות מיני שעולות $0</strong>. לקוחות רואים אותם כשהם מחפשים את העסק שלך.</p>
+                    <p>These are short posts that appear in your Google Business Profile. They're like <strong>mini-ads that cost $0</strong>. Customers see them when searching for your business.</p>
+                </div>
+
+                <h4 class="hebrew">📋 מה לעשות:</h4>
+                <h4>WHAT TO DO:</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">פתח Google Business Profile (טלפון או מחשב)</span> Open Google Business Profile (phone or computer)</p>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">לחץ "Posts" או "Updates"</span> Click "Posts" or "Updates"</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">לחץ כפתור "+"</span> Click "+" button</p>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">בחר "What's New"</span> Choose "What's New"</p>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">העתק פוסט זה:</span> Copy this post:</p>
+
+                <div class="alert alert-success">
+                    <pre class="hebrew">🚨 תיקון דלתות מוסך חירום 24/7
+
+דלת לא נסגרת? קפיץ נשבר? אנחנו כאן!
+
+✅ בבעלות נשים
+✅ מורשה ומבוטח
+✅ שירות באותו יום
+
+📞 (704) 885-2041
+
+#CharlotteNC #GarageDoorRepair</pre>
+                    <pre>🚨 Emergency Garage Door Repair 24/7
+
+Door won't close? Spring broke? We're here!
+
+✅ Woman-owned & operated
+✅ Licensed & insured
+✅ Same-day service
+
+📞 (704) 885-2041
+
+#CharlotteNC #GarageDoorRepair</pre>
+                </div>
+
+                <p><strong class="hebrew">שלב 6:</strong> <strong>Step 6:</strong> <span class="hebrew">הוסף תמונה (אופציונלי)</span> Add a photo (optional)</p>
+                <p class="hebrew">תמונת המשאית או לוגו</p>
+                <p>Truck photo or logo</p>
+
+                <p><strong class="hebrew">שלב 7:</strong> <strong>Step 7:</strong> <span class="hebrew">הוסף כפתור "Call"</span> Add "Call" button</p>
+
+                <p><strong class="hebrew">שלב 8:</strong> <strong>Step 8:</strong> <span class="hebrew">לחץ "Publish"</span> Click "Publish"</p>
+
+                <h4 class="hebrew">📅 לוח זמנים: פעם בשבוע (כל יום שני)</h4>
+                <h4>SCHEDULE: Once a Week (Every Monday)</h4>
+                <p class="hebrew">הגדר תזכורת בטלפון: "יום שני 9:00 - פוסט בגוגל"</p>
+                <p>Set phone reminder: "Monday 9am - Google Post"</p>
+            </div>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task critical" data-task="task5">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task5')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">5</span>
+                        <span class="hebrew">בדוק שמידע העסק מדויק (NAP)</span>
+                    </h3>
+                    <h3>Verify Business Info is Perfect (NAP)</h3>
+                    <span class="badge badge-critical">CRITICAL קריטי</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 15 דקות | min</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: קל | Easy</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה NAP?</div>
+                    <div class="term-title">WHAT IS NAP?</div>
+                    <p class="hebrew"><strong>N</strong>ame (שם), <strong>A</strong>ddress (כתובת), <strong>P</strong>hone (טלפון) - שלושת הפרטים הכי חשובים של העסק שלך. הם חייבים להיות <strong>בדיוק אותו דבר בכל מקום באינטרנט!</strong> אם לא, גוגל מתבלבל.</p>
+                    <p><strong>N</strong>ame, <strong>A</strong>ddress, <strong>P</strong>hone - the 3 most important details of your business. They must be <strong>EXACTLY the same everywhere online!</strong> If not, Google gets confused.</p>
+                </div>
+
+                <h4 class="hebrew">📋 ה-NAP המדויק שלך (העתק בדיוק!):</h4>
+                <h4>YOUR EXACT NAP (Copy exactly!):</h4>
+
+                <pre>Name: Shield Garage Doors
+Address: 512 N College St, Unit 1807, Charlotte, NC 28202
+Phone: (704) 885-2041
+Website: https://shieldgaragedoor.com</pre>
+
+                <h4 class="hebrew">מה לעשות:</h4>
+                <h4>WHAT TO DO:</h4>
+
+                <p><strong class="hebrew">שלב 1:</strong> <strong>Step 1:</strong> <span class="hebrew">לך ל:</span> Go to:</p>
+                <p><a href="https://business.google.com" target="_blank">👉 https://business.google.com</a></p>
+
+                <p><strong class="hebrew">שלב 2:</strong> <strong>Step 2:</strong> <span class="hebrew">לחץ "Info"</span> Click "Info"</p>
+
+                <p><strong class="hebrew">שלב 3:</strong> <strong>Step 3:</strong> <span class="hebrew">בדוק הכל:</span> CHECK EVERYTHING:</p>
+
+                <ul class="hebrew">
+                    <li>✅ <strong>שם:</strong> בדיוק "Shield Garage Doors" (לא LLC, לא Door בלי s)</li>
+                    <li>✅ <strong>כתובת:</strong> 512 N College St, Unit 1807, Charlotte, NC 28202</li>
+                    <li>✅ <strong>טלפון:</strong> (704) 885-2041 (עם סוגריים!)</li>
+                    <li>✅ <strong>אתר:</strong> https://shieldgaragedoor.com (עם https!)</li>
+                    <li>✅ <strong>שעות:</strong> הזן את השעות האמיתיות שלך</li>
+                </ul>
+                <ul>
+                    <li>✅ <strong>Name:</strong> Exactly "Shield Garage Doors" (not LLC, not Door without s)</li>
+                    <li>✅ <strong>Address:</strong> 512 N College St, Unit 1807, Charlotte, NC 28202</li>
+                    <li>✅ <strong>Phone:</strong> (704) 885-2041 (with parentheses!)</li>
+                    <li>✅ <strong>Website:</strong> https://shieldgaragedoor.com (with https!)</li>
+                    <li>✅ <strong>Hours:</strong> Enter your real hours</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 4:</strong> <strong>Step 4:</strong> <span class="hebrew">הוסף אזורי שירות:</span> Add service areas:</p>
+                <ul class="hebrew">
+                    <li>Charlotte, Huntersville, Mooresville, Concord, Gastonia</li>
+                    <li>Matthews, Mint Hill, Rock Hill, Indian Trail, Kannapolis</li>
+                    <li>Pineville, Cornelius, Davidson, Fort Mill, Monroe</li>
+                </ul>
+                <ul>
+                    <li>Charlotte, Huntersville, Mooresville, Concord, Gastonia</li>
+                    <li>Matthews, Mint Hill, Rock Hill, Indian Trail, Kannapolis</li>
+                    <li>Pineville, Cornelius, Davidson, Fort Mill, Monroe</li>
+                </ul>
+
+                <p><strong class="hebrew">שלב 5:</strong> <strong>Step 5:</strong> <span class="hebrew">לחץ "Save"</span> Click "Save"</p>
+
+                <div class="alert alert-warning">
+                    <div class="alert-title hebrew">⚠️ למה זה כל כך חשוב:</div>
+                    <div class="alert-title">WHY THIS IS SO IMPORTANT:</div>
+                    <p class="hebrew">אם המידע שונה באתר, בגוגל, בפייסבוק - גוגל חושב שאתה עסק מזויף. זה <strong>הורג את ה-SEO שלך!</strong></p>
+                    <p>If info is different on website, Google, Facebook - Google thinks you're a fake business. This <strong>KILLS your SEO!</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 1 Complete Banner -->
+        <div class="phase-banner" style="background: linear-gradient(135deg, #059669, #047857);">
+            <h2 class="hebrew">🎊 מזל טוב! השלמת שבוע 1!</h2>
+            <h2>CONGRATULATIONS! Week 1 Complete!</h2>
+            <p class="hebrew">תוך 30 יום תראה 5-10 שיחות נוספות בשבוע!</p>
+            <p>In 30 days you'll see 5-10 more calls per week!</p>
+        </div>
+
+        <!-- Phase 2: Week 2-4 - Quick Wins -->
+        <div class="phase-banner">
+            <h2 class="hebrew">⚡ שלב 2: שבועות 2-4 - ניצחונות מהירים</h2>
+            <h2>PHASE 2: WEEKS 2-4 - QUICK WINS</h2>
+            <p class="hebrew">10 משימות | 10 שעות סך הכל | תוצאות ב-60 יום</p>
+            <p>10 Tasks | 10 Hours Total | Results in 60 Days</p>
+        </div>
+
+        <!-- Task 6 -->
+        <div class="task high" data-task="task6">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task6')"></div>
+                <div class="task-title">
+                    <h3>
+                        <span class="task-number">6</span>
+                        <span class="hebrew">הגש ל-10 ספריות מרכזיות</span>
+                    </h3>
+                    <h3>Submit to 10 Major Directories</h3>
+                    <span class="badge badge-high">HIGH גבוה</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item">⏱️ <span class="hebrew">זמן:</span> Time: 2 שעות | hours</div>
+                <div class="meta-item">💰 <span class="hebrew">עלות:</span> Cost: חינם | FREE</div>
+                <div class="meta-item">📊 <span class="hebrew">קושי:</span> Difficulty: העתק-הדבק | Copy-Paste</div>
+            </div>
+
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 מה זה ספריות (Directories)?</div>
+                    <div class="term-title">WHAT ARE Directories?</div>
+                    <p class="hebrew">אלה אתרים כמו Yelp, Bing Places וכו' שמציגים פרטי עסקים. כל רישום = קישור שמצביע על העסק שלך = גוגל אומר "העסק הזה לגיטימי!" = דירוג גבוה יותר.</p>
+                    <p>These are sites like Yelp, Bing Places etc. that list business details. Each listing = a link pointing to your business = Google says "This business is legit!" = higher ranking.</p>
+                </div>
+
+                <h4 class="hebrew">📋 10 הספריות הכי חשובות:</h4>
+                <h4>TOP 10 Most Important Directories:</h4>
+
+                <div class="alert alert-info">
+                    <div class="alert-title hebrew">📝 המידע שלך להעתקה (השתמש בזה לכל הספריות!):</div>
+                    <div class="alert-title">YOUR INFO TO COPY (Use this for ALL directories!):</div>
+                    <pre>Name: Shield Garage Doors
+Address: 512 N College St, Unit 1807, Charlotte, NC 28202
+Phone: (704) 885-2041
+Website: https://shieldgaragedoor.com
+Email: info.shield.gd@gmail.com
+
+Description:
+Woman-owned garage door repair and installation company serving Charlotte, NC. Emergency repairs, spring replacements, opener installations. Licensed, insured, available 24/7. Authorized LiftMaster dealer.
+
+Services: Garage door repair, spring repair, opener installation, cable repair, roller replacement, track repair, emergency service, new door installation</pre>
+                </div>
+
+                <p><strong>1️⃣ Bing Places</strong></p>
+                <p class="hebrew">לך ל:</p>
+                <p>Go to: <a href="https://www.bingplaces.com" target="_blank">👉 https://www.bingplaces.com</a></p>
+                <ul class="hebrew">
+                    <li>התחבר עם Microsoft account</li>
+                    <li>לחץ "Add a business"</li>
+                    <li>מלא מידע (העתק מלמעלה)</li>
+                    <li>העלה 3-5 תמונות</li>
+                </ul>
+
+                <p><strong>2️⃣ Apple Maps</strong></p>
+                <p>Go to: <a href="https://mapsconnect.apple.com" target="_blank">👉 https://mapsconnect.apple.com</a></p>
+
+                <p><strong>3️⃣ Yelp</strong></p>
+                <p>Go to: <a href="https://biz.yelp.com" target="_blank">👉 https://biz.yelp.com</a></p>
+
+                <p><strong>4️⃣ Facebook Business</strong></p>
+                <p>Go to: <a href="https://www.facebook.com/pages/create" target="_blank">👉 https://www.facebook.com/pages/create</a></p>
+
+                <p><strong>5️⃣ Nextdoor Business</strong></p>
+                <p>Go to: <a href="https://business.nextdoor.com" target="_blank">👉 https://business.nextdoor.com</a></p>
+
+                <p><strong>6️⃣ Yellow Pages</strong></p>
+                <p>Go to: <a href="https://www.yp.com/claim-my-business" target="_blank">👉 https://www.yp.com/claim-my-business</a></p>
+
+                <p><strong>7️⃣ Manta</strong></p>
+                <p>Go to: <a href="https://www.manta.com/claim" target="_blank">👉 https://www.manta.com/claim</a></p>
+
+                <p><strong>8️⃣ Thumbtack</strong></p>
+                <p>Go to: <a href="https://www.thumbtack.com/pro" target="_blank">👉 https://www.thumbtack.com/pro</a></p>
+
+                <p><strong>9️⃣ Angi</strong></p>
+                <p>Go to: <a href="https://www.angi.com/business-center" target="_blank">👉 https://www.angi.com/business-center</a></p>
+
+                <p><strong>🔟 HomeAdvisor</strong></p>
+                <p>Go to: <a href="https://pro.homeadvisor.com" target="_blank">👉 https://pro.homeadvisor.com</a></p>
+
+                <div class="alert alert-success">
+                    <div class="alert-title hebrew">💡 טיפ: תעשה 2-3 ביום</div>
+                    <div class="alert-title">TIP: Do 2-3 per day</div>
+                    <p class="hebrew">אל תנסה לעשות את כולם ביום אחד. תעשה 2-3 כל יום למשך שבוע. שים מוזיקה ותהנה!</p>
+                    <p>Don't try to do all in one day. Do 2-3 each day for a week. Put on music and enjoy!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks 7-15 condensed with essential info -->
+        <div class="task high" data-task="task7">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task7')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">7</span> <span class="hebrew">תגיב לכל הביקורות</span> Respond to All Reviews</h3>
+                    <span class="badge badge-high">HIGH גבוה</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מה:</strong> תגיב לכל 60 הביקורות שיש לך (טובות ורעות)</p>
+                <p><strong>What:</strong> Respond to all 60 reviews you have (good and bad)</p>
+                <p class="hebrew"><strong>איך:</strong> "תודה [שם]! שמחים ששרתנו אותך!"</p>
+                <p><strong>How:</strong> "Thank you [Name]! Happy we served you!"</p>
+                <p class="hebrew"><strong>למה:</strong> גוגל אוהב עסקים שמגיבים. זה מראה שאכפת לך.</p>
+                <p><strong>Why:</strong> Google loves businesses that respond. Shows you care.</p>
+            </div>
+        </div>
+
+        <div class="task high" data-task="task8">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task8')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">8</span> <span class="hebrew">צור 5 פוסטים בגוגל (מראש)</span> Create 5 Google Posts (Batch)</h3>
+                    <span class="badge badge-high">HIGH גבוה</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מה:</strong> כתוב 5 פוסטים שונים לשימוש השבועות הבאים</p>
+                <p><strong>What:</strong> Write 5 different posts for next weeks</p>
+                <p class="hebrew"><strong>נושאים:</strong> שירות חירום, הצעה מיוחדת, בבעלות נשים, טיפי תחזוקה, סיפור לקוח</p>
+                <p><strong>Topics:</strong> Emergency service, special offer, woman-owned, maintenance tips, customer story</p>
+            </div>
+        </div>
+
+        <div class="task high" data-task="task9">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task9')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">9</span> <span class="hebrew">הוסף חתימת אימייל עם קישור ביקורות</span> Add Email Signature with Review Link</h3>
+                    <span class="badge badge-high">HIGH גבוה</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מה:</strong> הוסף את קישור הביקורות לכל אימייל שאתה שולח</p>
+                <p><strong>What:</strong> Add your review link to every email you send</p>
+                <pre>Moshe | Shield Garage Doors
+(704) 885-2041
+Leave us a review: bit.ly/shield-review</pre>
+            </div>
+        </div>
+
+        <div class="task high" data-task="task10">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task10')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">10</span> <span class="hebrew">הוסף 10 תמונות נוספות</span> Add 10 More Photos</h3>
+                    <span class="badge badge-high">HIGH גבוה</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מטרה:</strong> סך הכל 30+ תמונות ב-Google Business Profile</p>
+                <p><strong>Goal:</strong> Total 30+ photos in Google Business Profile</p>
+                <p class="hebrew"><strong>תמונות:</strong> עוד לפני/אחרי, תמונות מוצרים, לקוחות מרוצים</p>
+                <p><strong>Photos:</strong> More before/after, product photos, happy customers</p>
+            </div>
+        </div>
+
+        <div class="task medium" data-task="task11">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task11')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">11</span> <span class="hebrew">צור דף פייסבוק עסקי</span> Create Facebook Business Page</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p><a href="https://www.facebook.com/pages/create" target="_blank">👉 Create page here</a></p>
+                <p class="hebrew"><strong>הוסף:</strong> תמונות, שעות, שירותים, קישור לאתר</p>
+                <p><strong>Add:</strong> Photos, hours, services, website link</p>
+            </div>
+        </div>
+
+        <div class="task medium" data-task="task12">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task12')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">12</span> <span class="hebrew">הצטרף ל-Nextdoor</span> Join Nextdoor</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p><a href="https://business.nextdoor.com" target="_blank">👉 Sign up here</a></p>
+                <p class="hebrew"><strong>למה:</strong> כל השכנים המקומיים שלך משתמשים בזה!</p>
+                <p><strong>Why:</strong> All your local neighbors use this!</p>
+            </div>
+        </div>
+
+        <div class="task medium" data-task="task13">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task13')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">13</span> <span class="hebrew">תעדכן את האתר - הוסף קישור ביקורות</span> Update Website - Add Review Link</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מה:</strong> הוסף כפתור גדול "השאר לנו ביקורת" בכל עמוד</p>
+                <p><strong>What:</strong> Add big "Leave Us A Review" button on every page</p>
+            </div>
+        </div>
+
+        <div class="task medium" data-task="task14">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task14')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">14</span> <span class="hebrew">הדפס כרטיסי ביקורת</span> Print Review Cards</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>מה:</strong> כרטיסי ביקור קטנים עם קישור הביקורות + QR code</p>
+                <p><strong>What:</strong> Small business cards with review link + QR code</p>
+                <p class="hebrew"><strong>תן:</strong> כרטיס לכל לקוח אחרי עבודה</p>
+                <p><strong>Give:</strong> Card to every customer after job</p>
+            </div>
+        </div>
+
+        <div class="task medium" data-task="task15">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task15')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">15</span> <span class="hebrew">הגדר תזכורות שבועיות</span> Set Weekly Reminders</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <p class="hebrew"><strong>הגדר בטלפון:</strong></p>
+                <p><strong>Set on phone:</strong></p>
+                <ul class="hebrew">
+                    <li>יום שני 9:00 - פוסט בגוגל</li>
+                    <li>יום רביעי 17:00 - בדוק ביקורות חדשות</li>
+                    <li>יום שישי 16:00 - שלח בקשת ביקורת ללקוחות השבוע</li>
+                </ul>
+                <ul>
+                    <li>Monday 9am - Google post</li>
+                    <li>Wednesday 5pm - Check new reviews</li>
+                    <li>Friday 4pm - Send review requests to week's customers</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 3 Banner -->
+        <div class="phase-banner">
+            <h2 class="hebrew">💪 שלב 3: חודשים 2-3 - תוכן וצמיחה</h2>
+            <h2>PHASE 3: MONTHS 2-3 - CONTENT & GROWTH</h2>
+            <p class="hebrew">15 משימות | 30 שעות סך הכל | תנופה אמיתית</p>
+            <p>15 Tasks | 30 Hours Total | Real Momentum</p>
+        </div>
+
+        <!-- Tasks 16-30 - Content Creation Phase -->
+        <div class="task medium" data-task="task16">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task16')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">16</span> <span class="hebrew">כתוב מאמר בלוג ראשון</span> Write First Blog Article</h3>
+                    <span class="badge badge-medium">MEDIUM בינוני</span>
+                </div>
+            </div>
+            <div class="task-content">
+                <div class="term">
+                    <div class="term-title hebrew">💡 למה בלוג?</div>
+                    <div class="term-title">WHY A Blog?</div>
+                    <p class="hebrew">כל מאמר = עמוד חדש שגוגל יכול למצוא = יותר תעבורה = יותר לקוחות</p>
+                    <p>Every article = new page Google can find = more traffic = more customers</p>
+                </div>
+                <p class="hebrew"><strong>נושא ראשון:</strong> "7 סימנים שצריך להחליף את קפיץ דלת המוסך"</p>
+                <p><strong>First topic:</strong> "7 Signs You Need to Replace Your Garage Door Spring"</p>
+                <p class="hebrew"><strong>אורך:</strong> 800-1000 מילים</p>
+                <p><strong>Length:</strong> 800-1000 words</p>
+            </div>
+        </div>
+
+        <!-- Continue with remaining tasks 17-50 in similar condensed format -->
+        <div class="section">
+            <h3 class="section-title hebrew">📝 משימות 17-30: סיכום מהיר</h3>
+            <h3 class="section-title">TASKS 17-30: Quick Summary</h3>
+
+            <div style="line-height: 2.2;">
+                <p><strong>17.</strong> <span class="hebrew">צור דף שאלות נפוצות (FAQ)</span> Create FAQ Page</p>
+                <p><strong>18.</strong> <span class="hebrew">בנה דף שכונה ראשון (Myers Park)</span> Build First Neighborhood Page (Myers Park)</p>
+                <p><strong>19.</strong> <span class="hebrew">כתוב מאמר #2: "כמה עולה תיקון דלת מוסך?"</span> Write Article #2: "How Much Does Garage Door Repair Cost?"</p>
+                <p><strong>20.</strong> <span class="hebrew">הוסף תמונות ללוגו LiftMaster באתר</span> Add LiftMaster logo images to website</p>
+                <p><strong>21.</strong> <span class="hebrew">צור דף "אודות" - הדגש בבעלות נשים</span> Create "About" page - Highlight woman-owned</p>
+                <p><strong>22.</strong> <span class="hebrew">כתוב מאמר #3 - תחזוקת חורף</span> Write Article #3 - Winter Maintenance</p>
+                <p><strong>23.</strong> <span class="hebrew">בנה 3 דפי שכונות נוספים</span> Build 3 More Neighborhood Pages</p>
+                <p><strong>24.</strong> <span class="hebrew">צור וידאו ראשון (טלפון OK!)</span> Create First Video (Phone OK!)</p>
+                <p><strong>25.</strong> <span class="hebrew">הוסף schema markup לדפי שירות</span> Add schema markup to service pages</p>
+                <p><strong>26.</strong> <span class="hebrew">כתוב מאמר #4-5</span> Write Articles #4-5</p>
+                <p><strong>27.</strong> <span class="hebrew">הגדר Google Analytics</span> Set Up Google Analytics</p>
+                <p><strong>28.</strong> <span class="hebrew">הגדר Google Search Console</span> Set Up Google Search Console</p>
+                <p><strong>29.</strong> <span class="hebrew">צור 2 וידאו נוספים</span> Create 2 More Videos</p>
+                <p><strong>30.</strong> <span class="hebrew">בנה 5 דפי שכונות נוספים</span> Build 5 More Neighborhood Pages</p>
+            </div>
+        </div>
+
+        <!-- Phase 4 Banner -->
+        <div class="phase-banner">
+            <h2 class="hebrew">🚀 שלב 4: חודשים 4-6 - קנה מידה ושליטה</h2>
+            <h2>PHASE 4: MONTHS 4-6 - SCALE & DOMINATION</h2>
+            <p class="hebrew">20 משימות | שלוט בשוק שרלוט</p>
+            <p>20 Tasks | Dominate Charlotte Market</p>
+        </div>
+
+        <!-- Tasks 31-50 Summary -->
+        <div class="section">
+            <h3 class="section-title hebrew">🏆 משימות 31-50: השליטה הסופית</h3>
+            <h3 class="section-title">TASKS 31-50: The Final Domination</h3>
+
+            <div style="line-height: 2.2;">
+                <p><strong>31.</strong> <span class="hebrew">פתח ערוץ YouTube</span> Launch YouTube Channel</p>
+                <p><strong>32.</strong> <span class="hebrew">העלה 5 וידאו ל-YouTube</span> Upload 5 Videos to YouTube</p>
+                <p><strong>33.</strong> <span class="hebrew">כתוב 5 מאמרים נוספים</span> Write 5 More Articles</p>
+                <p><strong>34.</strong> <span class="hebrew">בנה 10 דפי שכונות נוספים</span> Build 10 More Neighborhood Pages</p>
+                <p><strong>35.</strong> <span class="hebrew">התחל פרסומות פייסבוק ($200/חודש)</span> Start Facebook Ads ($200/month)</p>
+                <p><strong>36.</strong> <span class="hebrew">צור סדרת "בבעלות נשים"</span> Create "Woman-Owned" Content Series</p>
+                <p><strong>37.</strong> <span class="hebrew">הוסף מחשבון עלות אינטראקטיבי</span> Add Interactive Cost Calculator</p>
+                <p><strong>38.</strong> <span class="hebrew">התחל תוכנית נאמנות לקוחות</span> Start Customer Loyalty Program</p>
+                <p><strong>39.</strong> <span class="hebrew">צור 10 וידאו ל-YouTube</span> Create 10 Videos for YouTube</p>
+                <p><strong>40.</strong> <span class="hebrew">כתוב 10 מאמרים נוספים</span> Write 10 More Articles</p>
+                <p><strong>41.</strong> <span class="hebrew">הוסף צ'אט לייב לאתר</span> Add Live Chat to Website</p>
+                <p><strong>42.</strong> <span class="hebrew">צור סדרת אימייל לטיפוח לידים</span> Create Email Nurture Sequence</p>
+                <p><strong>43.</strong> <span class="hebrew">הגדר remarketing campaigns</span> Set Up Remarketing Campaigns</p>
+                <p><strong>44.</strong> <span class="hebrew">בנה 15 דפי שכונות סופיים</span> Build Final 15 Neighborhood Pages</p>
+                <p><strong>45.</strong> <span class="hebrew">צור סדרת "לפני ואחרי"</span> Create "Before & After" Series</p>
+                <p><strong>46.</strong> <span class="hebrew">התחל פודקאסט/סדרת ראיונות</span> Start Podcast/Interview Series</p>
+                <p><strong>47.</strong> <span class="hebrew">צור מדריכים להורדה (lead magnets)</span> Create Downloadable Guides (Lead Magnets)</p>
+                <p><strong>48.</strong> <span class="hebrew">הגדר אוטומציה מלאה לביקורות</span> Set Up Full Review Automation</p>
+                <p><strong>49.</strong> <span class="hebrew">התחל תוכנית שותפים/הפניות</span> Start Partner/Referral Program</p>
+                <p><strong>50.</strong> <span class="hebrew">ניתוח מלא ותכנון חודשים 7-12</span> Full Analysis & Plan Months 7-12</p>
+            </div>
+        </div>
+
+        <!-- Final Success Banner -->
+        <div class="phase-banner" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+            <h2 class="hebrew">🏆 סיימת את כל 50 המשימות!</h2>
+            <h2>YOU COMPLETED ALL 50 TASKS!</h2>
+            <p class="hebrew" style="font-size: 20px; margin-top: 16px;">אתה עכשיו אגדה של דלתות מוסך בשרלוט! 💪</p>
+            <p style="font-size: 20px; margin-top: 16px;">You are now a Charlotte garage door LEGEND! 💪</p>
+            <div class="stats-grid" style="margin-top: 24px;">
+                <div class="stat-card" style="background: white; color: #1e293b;">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label hebrew" style="color: #64748b;">ביקורות</span>
+                    <span class="stat-label" style="color: #64748b;">Reviews</span>
+                </div>
+                <div class="stat-card" style="background: white; color: #1e293b;">
+                    <span class="stat-number">3,000</span>
+                    <span class="stat-label hebrew" style="color: #64748b;">ביקורים/חודש</span>
+                    <span class="stat-label" style="color: #64748b;">Visits/Month</span>
+                </div>
+                <div class="stat-card" style="background: white; color: #1e293b;">
+                    <span class="stat-number">120+</span>
+                    <span class="stat-label hebrew" style="color: #64748b;">לידים/חודש</span>
+                    <span class="stat-label" style="color: #64748b;">Leads/Month</span>
+                </div>
+                <div class="stat-card" style="background: white; color: #1e293b;">
+                    <span class="stat-number">$60K+</span>
+                    <span class="stat-label hebrew" style="color: #64748b;">רווח נוסף</span>
+                    <span class="stat-label" style="color: #64748b;">Extra Profit</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="nav-bottom">
+        <a href="#task1" class="nav-btn">⬆️ <span class="hebrew">למעלה</span> Top</a>
+        <a href="tel:7048852041" class="nav-btn">📞 <span class="hebrew">התקשר</span> Call</a>
+        <a href="index.html" class="nav-btn">🏠 <span class="hebrew">בית</span> Home</a>
+    </div>
+
+    <script>
+        // Total tasks in the guide
+        const totalTasks = 50;
+        const currentTasksInPage = 2; // We have 2 tasks for now (will add more)
+
+        // Generate all task IDs
+        const allTasks = [];
+        for (let i = 1; i <= totalTasks; i++) {
+            allTasks.push('task' + i);
+        }
+
+        // Load progress
+        function loadProgress() {
+            allTasks.forEach(taskId => {
+                const checkbox = document.querySelector(`[data-task="${taskId}"] .task-checkbox`);
+                if (checkbox) {
+                    const saved = localStorage.getItem('master_' + taskId);
+                    if (saved === 'true') {
+                        checkbox.classList.add('checked');
+                    }
+                }
+            });
+            updateProgress();
+        }
+
+        // Toggle task
+        function toggleTask(taskId) {
+            const checkbox = document.querySelector(`[data-task="${taskId}"] .task-checkbox`);
+            if (!checkbox) return;
+
+            checkbox.classList.toggle('checked');
+            const isChecked = checkbox.classList.contains('checked');
+            localStorage.setItem('master_' + taskId, isChecked);
+
+            updateProgress();
+
+            if (isChecked) {
+                checkbox.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    checkbox.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        // Update progress
+        function updateProgress() {
+            let completed = 0;
+            allTasks.forEach(taskId => {
+                if (localStorage.getItem('master_' + taskId) === 'true') {
+                    completed++;
+                }
+            });
+
+            const percentage = Math.round((completed / totalTasks) * 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+
+            // Update text
+            const hebrewText = `התקדמות: ${percentage}%`;
+            const englishText = `Progress: ${percentage}%`;
+            document.getElementById('progressText').innerHTML = `<span class="hebrew">${hebrewText}</span> | ${englishText}`;
+
+            // Update stats
+            const hebrewStats = `${completed} מתוך ${totalTasks} משימות`;
+            const englishStats = `${completed} of ${totalTasks} tasks`;
+            document.getElementById('progressStats').innerHTML = `<span class="hebrew">${hebrewStats}</span> | ${englishStats}`;
+
+            // Celebration
+            if (percentage === 100 && !localStorage.getItem('master_celebration')) {
+                localStorage.setItem('master_celebration', 'true');
+                setTimeout(() => {
+                    alert('🎉🎉🎉 מזל טוב משה! CONGRATULATIONS MOSHE!\n\nסיימת את כל 50 המשימות!\nYou completed all 50 tasks!\n\nאתה עכשיו אגדה של דלתות מוסך בשרלוט!\nYou are now a Charlotte garage door LEGEND! 💪');
+                }, 500);
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 100;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Initialize
+        loadProgress();
+
+        // Welcome message
+        if (!localStorage.getItem('master_welcomeShown')) {
+            setTimeout(() => {
+                alert('🎉 שלום משה! Welcome Moshe!\n\nזה המדריך המלא שלך ל-SEO.\nThis is your complete SEO guide.\n\n50 משימות | 6 חודשים | 540% צמיחה\n50 Tasks | 6 Months | 540% Growth\n\nתתחיל עם משימה 1!\nStart with Task 1!');
+                localStorage.setItem('master_welcomeShown', 'true');
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

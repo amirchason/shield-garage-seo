@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Moshe's SEO Plan - תוכנית SEO של משה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --success: #059669;
+            --warning: #ea580c;
+            --critical: #dc2626;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            padding-bottom: 100px;
+        }
+
+        .hebrew {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-subtle);
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            text-align: center;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.95;
+            margin: 4px 0;
+        }
+
+        .start-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            color: var(--primary);
+        }
+
+        /* Task Card */
+        .task {
+            background: var(--bg-subtle);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .task.critical {
+            border-left-color: var(--critical);
+        }
+
+        .task.high {
+            border-left-color: var(--warning);
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 4px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .task-checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .task-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .task-title {
+            flex: 1;
+        }
+
+        .task-title h3 {
+            font-size: 20px;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-light);
+        }
+
+        .meta-item strong {
+            color: var(--text);
+        }
+
+        .task-content {
+            margin-top: 16px;
+        }
+
+        .task-content h4 {
+            font-size: 16px;
+            margin: 16px 0 8px;
+            color: var(--text);
+        }
+
+        .task-content p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .task-content ul, .task-content ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .task-content li {
+            margin: 8px 0;
+        }
+
+        .task-content code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .task-content pre {
+            background: white;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Priority Badge */
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .priority-critical {
+            background: #fecaca;
+            color: var(--critical);
+        }
+
+        .priority-high {
+            background: #fed7aa;
+            color: var(--warning);
+        }
+
+        /* Level Complete */
+        .level-complete {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 32px 0;
+        }
+
+        .level-complete h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        /* Navigation */
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: 16px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            flex: 1;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .nav-btn:active {
+            opacity: 0.8;
+        }
+
+        /* Collapsible */
+        .collapsible-header {
+            cursor: pointer;
+            padding: 16px;
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .collapsible-header::after {
+            content: '▼';
+            transition: transform 0.3s;
+        }
+
+        .collapsible-header.active::after {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.active {
+            max-height: 10000px;
+        }
+
+        /* Alert Box */
+        .alert {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .start-button {
+                font-size: 16px;
+                padding: 14px 28px;
+            }
+
+            .task-title h3 {
+                font-size: 18px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">התקדמות: 0% | Progress: 0%</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>🚪 תוכנית השליטה של משה בדלתות מוסך</h1>
+        <p>MOSHE'S GARAGE DOOR DOMINATION PLAN</p>
+        <p style="margin-top: 16px;">בן דוד שלך עשה את זה בשבילך כי הוא אוהב אותך ❤️</p>
+        <p>Your Cousin Made This For You Because He Loves You</p>
+        <a href="#task1" class="start-button">🚀 התחל כאן | START HERE</a>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+
+        <!-- Intro Section -->
+        <div class="section">
+            <h2 class="section-title hebrew">👋 היי משה!</h2>
+            <h2 class="section-title">HEY MOSHE!</h2>
+
+            <p class="hebrew">בן הדוד שלך חושב שאתה הולך להיות ענק בשרלוט. כמו, "אנשים יקראו לילדים שלהם על שמך" ענק.</p>
+            <p>Your cousin thinks you're going to be HUGE in Charlotte. Like, "people will name their kids after you" huge.</p>
+
+            <p class="hebrew" style="margin-top: 16px;">זו התוכנית שלך צעד אחר צעד לשלוט בגוגל ולקבל יותר שיחות ממה שאתה יכול להתמודד איתן.</p>
+            <p>This is your step-by-step plan to dominate Google and get MORE CALLS than you can handle.</p>
+
+            <div class="alert" style="margin-top: 24px;">
+                <div class="alert-title">✅ חדשות טובות | GOOD NEWS</div>
+                <p class="hebrew">יש לך כבר 60 ביקורות! זה יותר טוב מרוב המתחרים שלך.</p>
+                <p>You already have 60 reviews! That's better than most of your competitors.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">60</span>
+                    <span class="stat-label">ביקורות נוכחיות<br>Current Reviews</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">מטרה ב-90 יום<br>Goal in 90 Days</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">540%</span>
+                    <span class="stat-label">צמיחת לידים<br>Lead Growth</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">$60K+</span>
+                    <span class="stat-label">עלייה ברווח<br>Profit Increase</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 1 Tasks -->
+        <div class="section">
+            <h2 class="section-title hebrew">🎯 שלב 1: התחלה - שבוע 1</h2>
+            <h2 class="section-title">LEVEL 1: GETTING STARTED - Week 1</h2>
+            <p class="hebrew">5 שעות סך הכל | יש לך כבר Google Business Profile עם 60 ביקורות. יפה! עכשיו בוא נעשה את זה מושלם.</p>
+            <p>5 hours total | You already have a Google Business Profile with 60 reviews. NICE! Now let's make it PERFECT.</p>
+
+            <!-- Task 1 -->
+            <div class="task critical" id="task1" data-task="task1">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask('task1')"></div>
+                    <div class="task-title">
+                        <h3 class="hebrew">🔥 משימה 1: הגש בקשה ל-Google Local Service Ads</h3>
+                        <h3>🔥 TASK 1: Apply for Google Local Service Ads</h3>
+                        <span class="priority-badge priority-critical">CRITICAL קריטי</span>
+                    </div>
+                </div>
+
+                <div class="task-meta">
+                    <div class="meta-item"><strong>זמן | Time:</strong> 30 דקות | 30 min</div>
+                    <div class="meta-item"><strong>עלות | Cost:</strong> חינם | FREE</div>
+                    <div class="meta-item"><strong>קושי | Difficulty:</strong> קל | Easy</div>
+                </div>
+
+                <div class="task-content">
+                    <h4 class="hebrew">למה משה צריך לדאוג:</h4>
+                    <h4>Why Moshe Should Care:</h4>
+                    <p class="hebrew">זה שם את העסק שלך מעל כולם בגוגל. ממש, ממש בראש. הדבר הראשון שאנשים רואים. עם סימן ביקורת ירוק "Google Guaranteed".</p>
+                    <p>This puts your business ABOVE everyone else in Google. Like, literally on top. First thing people see. With a green "Google Guaranteed" checkmark.</p>
+
+                    <h4 class="hebrew">מה אתה מקבל:</h4>
+                    <h4>What You Get:</h4>
+                    <ul>
+                        <li class="hebrew">מופיע מעל תוצאות המפה</li>
+                        <li>Appear ABOVE the map results</li>
+                        <li class="hebrew">תג "Google Guaranteed" ירוק (אמון = $$$)</li>
+                        <li>Green "Google Guaranteed" badge (trust = $$$)</li>
+                        <li class="hebrew">משלם רק כשאנשים מתקשרים אליך</li>
+                        <li>Pay ONLY when people call you</li>
+                        <li class="hebrew">15-25 לידים בחודש (זה $4,500-$20,000 בהכנסות!)</li>
+                        <li>15-25 leads per month (that's $4,500-$20,000 in revenue!)</li>
+                    </ul>
+
+                    <h4 class="hebrew">צעד אחר צעד:</h4>
+                    <h4>Step-by-Step:</h4>
+                    <ol>
+                        <li>
+                            <p class="hebrew">לך לקישור הזה:</p>
+                            <p>Go to: <a href="https://ads.google.com/local-services" target="_blank">Apply for Local Service Ads</a></p>
+                        </li>
+                        <li>
+                            <p class="hebrew">לחץ על הכפתור הגדול "Get Started"</p>
+                            <p>Click the big "Get Started" button</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">בחר "Garage Door Repair" והכנס Charlotte, NC</p>
+                            <p>Choose "Garage Door Repair" and enter Charlotte, NC</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">תהיה מוכן עם: רישיון עסק, תעודת ביטוח, רשימת טכנאים, מידע בנק</p>
+                            <p>Have ready: Business license, insurance certificate, technician list, bank info</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">העלה את המסמכים כשגוגל מבקש</p>
+                            <p>Upload documents when Google asks</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">חכה לאימיילים של בדיקת רקע (3-7 ימים)</p>
+                            <p>Wait for background check emails (3-7 days)</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">קבל אישור תוך 2-3 שבועות - תראה את הטלפון מצלצל! 📞</p>
+                            <p>Get approved in 2-3 weeks - Watch the phone ring! 📞</p>
+                        </li>
+                    </ol>
+
+                    <div class="alert">
+                        <div class="alert-title">🚨 טעויות נפוצות של משה | MOSHE'S COMMON MISTAKES</div>
+                        <ul>
+                            <li class="hebrew">❌ "אני אעשה את זה מאוחר יותר" ← לא. תעשה את זה היום.</li>
+                            <li>❌ "I'll do it later" ← NO. Do it TODAY.</li>
+                            <li class="hebrew">❌ לא לענות לשיחות מהר ← תענה תוך 60 שניות</li>
+                            <li>❌ Not answering calls fast ← Answer in 60 seconds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2 -->
+            <div class="task high" data-task="task2">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask('task2')"></div>
+                    <div class="task-title">
+                        <h3 class="hebrew">⚡ משימה 2: העלה 20 תמונות ל-Google Business Profile</h3>
+                        <h3>⚡ TASK 2: Upload 20 Photos to Google Business Profile</h3>
+                        <span class="priority-badge priority-high">HIGH גבוה</span>
+                    </div>
+                </div>
+
+                <div class="task-meta">
+                    <div class="meta-item"><strong>זמן | Time:</strong> 45 דקות | 45 min</div>
+                    <div class="meta-item"><strong>עלות | Cost:</strong> חינם | FREE</div>
+                    <div class="meta-item"><strong>קושי | Difficulty:</strong> כל כך קל | So easy</div>
+                </div>
+
+                <div class="task-content">
+                    <h4 class="hebrew">למה משה צריך לדאוג:</h4>
+                    <h4>Why Moshe Should Care:</h4>
+                    <p class="hebrew">עסקים עם 30+ תמונות מקבלים 42% יותר שיחות. זה כמעט מחצית יותר. בחינם.</p>
+                    <p>Businesses with 30+ photos get 42% more calls. That's almost HALF MORE. For FREE.</p>
+
+                    <h4 class="hebrew">אילו תמונות לצלם:</h4>
+                    <h4>What Photos to Take:</h4>
+                    <ul>
+                        <li class="hebrew">📸 5 תמונות משאית/רכב (נקייה, זוויות שונות, לוגו גלוי)</li>
+                        <li>📸 5 Truck/Vehicle Photos (clean, different angles, logo visible)</li>
+                        <li class="hebrew">📸 10 תמונות לפני/אחרי עבודות (אלה זהב!)</li>
+                        <li>📸 10 Before/After Job Photos (these are GOLD!)</li>
+                        <li class="hebrew">📸 3 תמונות צוות (כולם מחייכים)</li>
+                        <li>📸 3 Team Photos (everyone smiling)</li>
+                        <li class="hebrew">📸 2 תמונות מוצרים (פותחנים, דלתות)</li>
+                        <li>📸 2 Product Photos (openers, doors)</li>
+                    </ul>
+
+                    <h4 class="hebrew">צעד אחר צעד:</h4>
+                    <h4>Step-by-Step:</h4>
+                    <ol>
+                        <li>
+                            <p class="hebrew">פתח אפליקציית "Google Business Profile" בטלפון</p>
+                            <p>Open "Google Business Profile" app on phone</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">הקש על "Photos" → "+" → בחר או צלם תמונות</p>
+                            <p>Tap "Photos" → "+" → Choose or take photos</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">העלה אותן והקש "Done"</p>
+                            <p>Upload them and tap "Done"</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">חזור עד שהעלת 20 תמונות</p>
+                            <p>Repeat until you've uploaded 20 photos</p>
+                        </li>
+                    </ol>
+
+                    <p><strong>Or go to: <a href="https://business.google.com" target="_blank">business.google.com</a></strong></p>
+                </div>
+            </div>
+
+            <!-- Task 3 -->
+            <div class="task high" data-task="task3">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask('task3')"></div>
+                    <div class="task-title">
+                        <h3 class="hebrew">⚡ משימה 3: קבל את קישור הביקורות הישיר שלך</h3>
+                        <h3>⚡ TASK 3: Get Your Direct Google Review Link</h3>
+                        <span class="priority-badge priority-high">HIGH גבוה</span>
+                    </div>
+                </div>
+
+                <div class="task-meta">
+                    <div class="meta-item"><strong>זמן | Time:</strong> 10 דקות | 10 min</div>
+                    <div class="meta-item"><strong>עלות | Cost:</strong> חינם | FREE</div>
+                    <div class="meta-item"><strong>קושי | Difficulty:</strong> יותר קל מלתקן דלת | Easier than fixing a door</div>
+                </div>
+
+                <div class="task-content">
+                    <h4 class="hebrew">למה משה צריך לדאוג:</h4>
+                    <h4>Why Moshe Should Care:</h4>
+                    <p class="hebrew">יש לך 60 ביקורות. למתחרה העליון שלך יש 210. אתה צריך לסגור את הפער הזה מהר.</p>
+                    <p>You have 60 reviews. Your top competitor has 210. You need to close that gap FAST.</p>
+
+                    <h4 class="hebrew">צעד אחר צעד:</h4>
+                    <h4>Step-by-Step:</h4>
+                    <ol>
+                        <li>
+                            <p class="hebrew">פתח אפליקציית Google Business Profile</p>
+                            <p>Open Google Business Profile app (or business.google.com)</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">לחץ "Customers" → "Reviews" → "Share review form"</p>
+                            <p>Click "Customers" → "Reviews" → "Share review form"</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">העתק את הקישור</p>
+                            <p>Copy the link (looks like: https://g.page/r/[...]/review)</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">תעשה אותו קצר יותר ב-bit.ly</p>
+                            <p>Make it shorter at <a href="https://bit.ly" target="_blank">bit.ly</a></p>
+                        </li>
+                        <li>
+                            <p class="hebrew">שמור בהערות הטלפון, חתימת אימייל, תבניות SMS</p>
+                            <p>Save in phone notes, email signature, text templates</p>
+                        </li>
+                    </ol>
+
+                    <h4 class="hebrew">🎯 סקריפט הביקורות (העתק והדבק):</h4>
+                    <h4>🎯 THE REVIEW SCRIPT (Copy & Paste):</h4>
+                    <pre class="hebrew">היי [שם הלקוח]! תודה שבחרת ב-Shield Garage Doors היום! 🚪
+
+נשמח לקבל את המשוב שלך! אנא שתף את החוויה שלך:
+👉 bit.ly/shield-review
+
+הביקורת שלך עוזרת למשפחות מקומיות למצוא שירות איכותי.
+
+- משה והצוות
+(704) 885-2041</pre>
+
+                    <pre>Hi [Customer Name]! Thanks for choosing Shield Garage Doors today! 🚪
+
+We'd love your feedback! Please share your experience:
+👉 bit.ly/shield-review
+
+Your review helps local families find quality service.
+
+- Moshe & Team
+(704) 885-2041</pre>
+
+                    <h4 class="hebrew">🎯 תוכנית משחק: 3-4 ביקורות בשבוע = 100 ביקורות ב-90 יום!</h4>
+                    <h4>🎯 GAME PLAN: 3-4 reviews per week = 100 reviews in 90 days!</h4>
+                </div>
+            </div>
+
+            <!-- Task 4 -->
+            <div class="task high" data-task="task4">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask('task4')"></div>
+                    <div class="task-title">
+                        <h3 class="hebrew">⚡ משימה 4: צור את הפוסט הראשון שלך בגוגל</h3>
+                        <h3>⚡ TASK 4: Create Your First Google Post</h3>
+                        <span class="priority-badge priority-high">HIGH גבוה</span>
+                    </div>
+                </div>
+
+                <div class="task-meta">
+                    <div class="meta-item"><strong>זמן | Time:</strong> 5 דקות | 5 min</div>
+                    <div class="meta-item"><strong>עלות | Cost:</strong> חינם | FREE</div>
+                    <div class="meta-item"><strong>קושי | Difficulty:</strong> אם אתה יכול לשלוח SMS | If you can text</div>
+                </div>
+
+                <div class="task-content">
+                    <h4 class="hebrew">למה משה צריך לדאוג:</h4>
+                    <h4>Why Moshe Should Care:</h4>
+                    <p class="hebrew">פוסטים של גוגל מופיעים בפרופיל העסקי שלך. הם כמו מיני-פרסומות שעולות $0.</p>
+                    <p>Google Posts show up in your Business Profile. They're like mini-ads that cost $0.</p>
+
+                    <h4 class="hebrew">צעד אחר צעד:</h4>
+                    <h4>Step-by-Step:</h4>
+                    <ol>
+                        <li>
+                            <p class="hebrew">פתח אפליקציית Google Business Profile</p>
+                            <p>Open Google Business Profile app</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">הקש "Posts" → "+" → בחר "What's New"</p>
+                            <p>Tap "Posts" → "+" → Choose "What's New"</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">העתק אחד מהפוסטים האלה:</p>
+                            <p>Copy one of these posts:</p>
+                        </li>
+                    </ol>
+
+                    <pre class="hebrew">🚨 תיקון דלתות מוסך חירום 24/7
+
+דלת המוסך לא נסגרת? קפיץ נשבר? אנחנו כאן לעזור!
+
+✅ בבעלות נשים ומופעלת על ידי נשים
+✅ מורשה ומבוטחה
+✅ שירות באותו יום
+
+📞 התקשר עכשיו: (704) 885-2041
+
+#CharlotteNC #GarageDoorRepair</pre>
+
+                    <pre>🚨 Emergency Garage Door Repair 24/7
+
+Garage door won't close? Spring broke? We're here to help!
+
+✅ Woman-owned & operated
+✅ Licensed & insured
+✅ Same-day service
+
+📞 Call now: (704) 885-2041
+
+#CharlotteNC #GarageDoorRepair</pre>
+
+                    <p class="hebrew">📅 <strong>לוח זמנים:</strong> פרסם פעם בשבוע (כל יום שני בבוקר)</p>
+                    <p>📅 <strong>Schedule:</strong> Post ONCE A WEEK (every Monday morning)</p>
+                </div>
+            </div>
+
+            <!-- Task 5 -->
+            <div class="task high" data-task="task5">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask('task5')"></div>
+                    <div class="task-title">
+                        <h3 class="hebrew">⚡ משימה 5: בדוק שמידע העסק שלך מושלם</h3>
+                        <h3>⚡ TASK 5: Check Your Business Info is Perfect</h3>
+                        <span class="priority-badge priority-high">HIGH גבוה</span>
+                    </div>
+                </div>
+
+                <div class="task-meta">
+                    <div class="meta-item"><strong>זמן | Time:</strong> 15 דקות | 15 min</div>
+                    <div class="meta-item"><strong>עלות | Cost:</strong> חינם | FREE</div>
+                    <div class="meta-item"><strong>קושי | Difficulty:</strong> רמת גן ילדים | Preschool level</div>
+                </div>
+
+                <div class="task-content">
+                    <h4 class="hebrew">חוק ה-NAP (שם, כתובת, טלפון):</h4>
+                    <h4>The NAP Rule (Name, Address, Phone):</h4>
+                    <p class="hebrew">המידע חייב להיות בדיוק אותו דבר בכל מקום באינטרנט!</p>
+                    <p>Info must be EXACTLY the same everywhere online!</p>
+
+                    <pre>Name: Shield Garage Doors
+Address: 512 N College St, Unit 1807, Charlotte, NC 28202
+Phone: (704) 885-2041
+Website: https://shieldgaragedoor.com</pre>
+
+                    <h4 class="hebrew">צעד אחר צעד:</h4>
+                    <h4>Step-by-Step:</h4>
+                    <ol>
+                        <li>
+                            <p>Go to <a href="https://business.google.com" target="_blank">business.google.com</a></p>
+                        </li>
+                        <li>
+                            <p class="hebrew">לחץ "Info" בתפריט השמאלי</p>
+                            <p>Click "Info" in the left menu</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">בדוק: שם עסק, כתובת, טלפון, אתר, שעות</p>
+                            <p>CHECK: Business name, address, phone, website, hours</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">הוסף אזור שירות: Charlotte, Huntersville, Mooresville, Concord, Gastonia...</p>
+                            <p>Add service area: Charlotte, Huntersville, Mooresville, Concord, Gastonia...</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">מלא תיאור עסק מפורט</p>
+                            <p>Fill in detailed business description</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">הוסף כל השירותים: תיקון, התקנה, קפיצים, פותחנים, חירום...</p>
+                            <p>Add all services: repair, installation, springs, openers, emergency...</p>
+                        </li>
+                        <li>
+                            <p class="hebrew">לחץ "Save"</p>
+                            <p>Click "Save"</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Level 1 Complete -->
+        <div class="level-complete">
+            <h3 class="hebrew">🎊 השלמת שלב 1!</h3>
+            <h3>🎊 LEVEL 1 COMPLETE!</h3>
+            <p class="hebrew">תן לעצמך High-Five. לא, ברצינות, תעשה את זה. 🙌</p>
+            <p>Give yourself a high-five. No seriously, do it. 🙌</p>
+
+            <p style="margin-top: 16px;"><strong class="hebrew">תוצאות צפויות תוך 30 יום:</strong></p>
+            <p><strong>Expected results in 30 days:</strong></p>
+            <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                <li>📞 5-10 שיחות נוספות בשבוע | 5-10 more calls per week</li>
+                <li>⭐ 10-15 ביקורות חדשות | 10-15 new reviews</li>
+                <li>👀 פי 2 יותר אנשים רואים את העסק | 2x more people seeing your business</li>
+            </ul>
+        </div>
+
+        <!-- Final Message -->
+        <div class="section" style="text-align: center; margin: 60px 0;">
+            <h2 class="section-title hebrew">🙏 מילים אחרונות מבן הדוד שלך</h2>
+            <h2 class="section-title">FINAL WORDS FROM YOUR COUSIN</h2>
+
+            <p class="hebrew" style="font-size: 18px; margin: 16px 0;">משה, התוכנית הזאת עובדת. אבל אתה חייב באמת לעשות את זה.</p>
+            <p style="font-size: 18px; margin: 16px 0;">Moshe, this plan works. But you have to actually DO it.</p>
+
+            <p class="hebrew" style="font-size: 24px; font-weight: 700; color: var(--primary); margin: 24px 0;">תתחיל היום.</p>
+            <p style="font-size: 24px; font-weight: 700; color: var(--primary); margin: 24px 0;">START TODAY.</p>
+
+            <p class="hebrew">תעשה משימה 1 עכשיו. זה ייקח 30 דקות. ואז משימה 2 מחר. ואז משימה 3 למחרת.</p>
+            <p>Do Task 1 right now. It'll take 30 minutes. Then Task 2 tomorrow. Then Task 3 the next day.</p>
+
+            <p class="hebrew" style="margin-top: 24px;">בן הדוד שלך מאמין בך. עכשיו לך ותעשה אותו גאה! 💪</p>
+            <p>Your cousin believes in you. Now go make him proud! 💪</p>
+
+            <p style="margin-top: 40px; font-style: italic;">
+                <span class="hebrew">נעשה באהבה ❤️ על ידי בן הדוד שלך</span><br>
+                Made with ❤️ by Your Cousin<br>
+                <span class="hebrew">למשה | Shield Garage Doors | שרלוט, NC</span><br>
+                For Moshe | Shield Garage Doors | Charlotte, NC
+            </p>
+
+            <p style="margin-top: 24px; font-size: 20px; font-weight: 700; color: var(--critical);">
+                <span class="hebrew">עכשיו תפסיק לקרוא ולך תעשה משימה 1! 🚀</span><br>
+                Now stop reading and GO DO TASK 1! 🚀
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="nav-bottom">
+        <a href="#task1" class="nav-btn">⬆️ חזרה לראש | Back to Top</a>
+        <a href="tel:7048852041" class="nav-btn">📞 התקשר | Call Shield</a>
+    </div>
+
+    <script>
+        // Task tracking
+        const tasks = ['task1', 'task2', 'task3', 'task4', 'task5'];
+
+        // Load saved progress
+        function loadProgress() {
+            tasks.forEach(taskId => {
+                const saved = localStorage.getItem(taskId);
+                if (saved === 'true') {
+                    document.querySelector(`[data-task="${taskId}"] .task-checkbox`).classList.add('checked');
+                }
+            });
+            updateProgress();
+        }
+
+        // Toggle task
+        function toggleTask(taskId) {
+            const checkbox = document.querySelector(`[data-task="${taskId}"] .task-checkbox`);
+            checkbox.classList.toggle('checked');
+
+            const isChecked = checkbox.classList.contains('checked');
+            localStorage.setItem(taskId, isChecked);
+
+            updateProgress();
+
+            // Celebration
+            if (isChecked) {
+                checkbox.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    checkbox.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            let completed = 0;
+            tasks.forEach(taskId => {
+                if (localStorage.getItem(taskId) === 'true') {
+                    completed++;
+                }
+            });
+
+            const percentage = Math.round((completed / tasks.length) * 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `התקדמות: ${percentage}% | Progress: ${percentage}%`;
+
+            // Celebration at 100%
+            if (percentage === 100) {
+                setTimeout(() => {
+                    alert('🎉🎉🎉 מזל טוב משה! השלמת את שבוע 1!\n\nCongratulations Moshe! You completed Week 1!\n\nNow keep going with the full plan!');
+                }, 500);
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize
+        loadProgress();
+
+        // Show welcome message on first visit
+        if (!localStorage.getItem('welcomeShownBilingual')) {
+            setTimeout(() => {
+                alert('שלום משה! 🎉\n\nWelcome Moshe!\n\nהמדריך שלך מוכן. תתחיל עם משימה 1!\nYour guide is ready. Start with Task 1!');
+                localStorage.setItem('welcomeShownBilingual', 'true');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

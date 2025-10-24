@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Moshe's Garage Door Domination Plan - Start Here!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --success: #059669;
+            --warning: #ea580c;
+            --critical: #dc2626;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            padding-bottom: 80px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-subtle);
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .progress-text {
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            margin: 8px 0;
+        }
+
+        .start-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-weight: 800;
+            margin-top: 24px;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Container */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        .section {
+            margin: 40px 0;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 0 16px;
+            color: var(--primary);
+        }
+
+        /* Task Card */
+        .task {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .task:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .task.critical {
+            border-color: var(--critical);
+            border-width: 3px;
+            background: linear-gradient(to bottom, #fff 0%, #fef2f2 100%);
+        }
+
+        .task.high {
+            border-color: var(--warning);
+            border-width: 3px;
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .task-checkbox {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .task-checkbox.checked {
+            background: linear-gradient(135deg, var(--success), #047857);
+            border-color: var(--success);
+            animation: checkPulse 0.5s;
+        }
+
+        @keyframes checkPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .task-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .task-title {
+            flex: 1;
+        }
+
+        .task-title h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .task-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 800;
+            margin-right: 8px;
+        }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 16px 0;
+            padding: 12px;
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .meta-icon {
+            font-size: 16px;
+        }
+
+        .task-content {
+            margin-top: 20px;
+        }
+
+        .task-content h4 {
+            font-size: 18px;
+            margin: 20px 0 12px;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .task-content p {
+            margin: 12px 0;
+            line-height: 1.7;
+        }
+
+        .task-content ul, .task-content ol {
+            margin: 16px 0;
+            padding-left: 28px;
+        }
+
+        .task-content li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .task-content pre {
+            background: var(--bg-subtle);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Priority Badge */
+        .priority-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .badge-critical {
+            background: var(--critical);
+            color: white;
+        }
+
+        .badge-high {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Alert Box */
+        .alert {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .alert-title {
+            font-weight: 800;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .alert ul {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        .alert li {
+            margin: 8px 0;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        /* Success Banner */
+        .success-banner {
+            background: linear-gradient(135deg, var(--success) 0%, #047857 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+        }
+
+        .success-banner h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            font-weight: 900;
+        }
+
+        .success-banner p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--primary);
+        }
+
+        /* Bottom Nav */
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: 12px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            flex: 1;
+            text-align: center;
+            margin: 0 6px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .start-button {
+                font-size: 18px;
+                padding: 16px 32px;
+            }
+
+            .task-title h3 {
+                font-size: 19px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Progress: 0% Complete - Let's Go! 🚀</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>🚪 MOSHE'S GARAGE DOOR DOMINATION PLAN</h1>
+            <p>Your Cousin Made This For You Because He Loves You ❤️</p>
+            <p style="margin-top: 16px; font-size: 20px; font-weight: 700;">Simple. Funny. Step-by-Step. Let's Dominate Charlotte! 💪</p>
+            <a href="#task1" class="start-button">🚀 START HERE - TASK 1</a>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+
+        <!-- Intro Section -->
+        <div class="section">
+            <h2 class="section-title">👋 HEY MOSHE!</h2>
+
+            <p>Your cousin thinks you're going to be <strong>HUGE</strong> in Charlotte. Like, "people will name their kids after you" huge.</p>
+
+            <p>This is your step-by-step plan to dominate Google and get <strong>MORE CALLS</strong> than you can handle.</p>
+
+            <div class="alert" style="margin-top: 24px;">
+                <div class="alert-title">✅ GOOD NEWS</div>
+                <p>You already have 60 reviews! That's better than most of your competitors.</p>
+                <p><strong>We're going to turn you into a Charlotte garage door LEGEND.</strong></p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">60</span>
+                    <span class="stat-label">Current Reviews</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Goal in 90 Days</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">540%</span>
+                    <span class="stat-label">Lead Growth Potential</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">$60K+</span>
+                    <span class="stat-label">Profit Increase</span>
+                </div>
+            </div>
+
+            <h3 style="margin: 24px 0 12px; font-size: 20px;">🎮 HOW THIS WORKS (Game Rules)</h3>
+            <p>Think of this like a video game. Each task gives you <strong>POINTS</strong>:</p>
+            <ul style="margin: 16px 0; list-style: none; padding: 0;">
+                <li style="margin: 10px 0;">🔥 <strong>CRITICAL</strong> = Do this NOW. Like, stop reading and go do it.</li>
+                <li style="margin: 10px 0;">⚡ <strong>HIGH</strong> = Do this this week. Your business will thank you.</li>
+            </ul>
+
+            <p style="margin-top: 20px; font-size: 18px; font-weight: 700; color: var(--primary);">Ready? Let's make you LEGENDARY! 🚀</p>
+        </div>
+
+        <!-- Week 1 Title -->
+        <div class="section">
+            <h2 class="section-title">🎯 LEVEL 1: GETTING STARTED</h2>
+            <h3 style="font-size: 20px; margin: 8px 0;">Week 1 - "The Foundation"</h3>
+            <p><strong>Time commitment:</strong> 5 hours total this week</p>
+            <p>You already have a Google Business Profile with 60 reviews. NICE! Now let's make it <strong>PERFECT</strong>.</p>
+        </div>
+
+        <!-- Task 1 -->
+        <div class="task critical" id="task1" data-task="task1">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task1')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">1</span> Apply for Google Local Service Ads</h3>
+                    <span class="priority-badge badge-critical">🔥 CRITICAL</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item"><span class="meta-icon">⏱️</span> 30 minutes</div>
+                <div class="meta-item"><span class="meta-icon">💰</span> FREE</div>
+                <div class="meta-item"><span class="meta-icon">📊</span> Easy</div>
+            </div>
+
+            <div class="task-content">
+                <h4>💡 Why Moshe Should Care:</h4>
+                <p>This puts your business <strong>ABOVE everyone else</strong> in Google. Like, literally on top. First thing people see. With a green "Google Guaranteed" checkmark.</p>
+                <p>You basically become Google's favorite garage door guy in Charlotte. 😎</p>
+
+                <h4>🎁 What You Get:</h4>
+                <ul>
+                    <li>Appear <strong>ABOVE</strong> the map results</li>
+                    <li>Green "Google Guaranteed" badge (trust = $$$)</li>
+                    <li>Pay <strong>ONLY</strong> when people call you</li>
+                    <li><strong>15-25 leads per month</strong> (that's $4,500-$20,000 in revenue!)</li>
+                </ul>
+
+                <h4>📋 Step-by-Step (For Dummies... err, Moshe):</h4>
+                <ol>
+                    <li>
+                        <strong>Go to this link:</strong><br>
+                        <a href="https://ads.google.com/local-services" target="_blank">👉 Apply for Local Service Ads</a>
+                    </li>
+                    <li>Click the big <strong>"Get Started"</strong> button (you can't miss it)</li>
+                    <li>Choose <strong>"Garage Door Repair"</strong> and enter <strong>Charlotte, NC</strong></li>
+                    <li>
+                        Have these ready:
+                        <ul>
+                            <li>Business license (your NC contractor license)</li>
+                            <li>Insurance certificate</li>
+                            <li>List of technicians (names and emails)</li>
+                            <li>Bank account info</li>
+                        </ul>
+                    </li>
+                    <li>Upload the documents when Google asks</li>
+                    <li>Wait for background check emails (3-7 days)</li>
+                    <li>Get approved in 2-3 weeks - Watch the phone ring! 📞</li>
+                </ol>
+
+                <div class="alert">
+                    <div class="alert-title">🚨 MOSHE'S COMMON MISTAKES TO AVOID:</div>
+                    <ul>
+                        <li>❌ "I'll do it later" ← <strong>NO. Do it TODAY.</strong></li>
+                        <li>❌ Uploading blurry documents ← Use your phone camera, take clear pics</li>
+                        <li>❌ Not answering calls fast ← Google tracks this! <strong>Answer in 60 seconds</strong></li>
+                        <li>❌ Forgetting to dispute bad leads ← Google will credit you back</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task high" data-task="task2">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task2')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">2</span> Upload 20 Photos to Google Business Profile</h3>
+                    <span class="priority-badge badge-high">⚡ HIGH</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item"><span class="meta-icon">⏱️</span> 45 minutes</div>
+                <div class="meta-item"><span class="meta-icon">💰</span> FREE</div>
+                <div class="meta-item"><span class="meta-icon">📊</span> Super Easy</div>
+            </div>
+
+            <div class="task-content">
+                <h4>💡 Why Moshe Should Care:</h4>
+                <p>Businesses with 30+ photos get <strong>42% more calls</strong>. That's almost HALF MORE. For FREE.</p>
+                <p>Just by uploading pictures of your truck and garage doors. This is a <strong>no-brainer</strong>.</p>
+
+                <h4>📸 What Photos to Take:</h4>
+                <ul>
+                    <li><strong>5 Truck/Vehicle Photos</strong> - Your Shield truck (clean, different angles, logo visible)</li>
+                    <li><strong>10 Before/After Job Photos</strong> - Broken → Fixed (customers LOVE these!)</li>
+                    <li><strong>3 Team Photos</strong> - You and your technicians (everyone smiling)</li>
+                    <li><strong>2 Product Photos</strong> - LiftMaster openers, new doors you sell</li>
+                </ul>
+
+                <h4>📋 Step-by-Step:</h4>
+                <ol>
+                    <li>Open <strong>"Google Business Profile"</strong> app on your phone (download from App Store/Play Store)</li>
+                    <li>Log in with Shield Garage Doors Google account</li>
+                    <li>Tap <strong>"Photos"</strong> at the bottom</li>
+                    <li>Tap the <strong>"+"</strong> button</li>
+                    <li>Take photos OR choose from your camera roll</li>
+                    <li>Upload them (tap "Done")</li>
+                    <li>Repeat until you've uploaded <strong>20 photos</strong></li>
+                </ol>
+
+                <p><strong>OR on computer:</strong> Go to <a href="https://business.google.com" target="_blank">business.google.com</a> → Photos → Add Photos</p>
+
+                <div class="alert">
+                    <div class="alert-title">🚨 MOSHE'S PHOTO MISTAKES TO AVOID:</div>
+                    <ul>
+                        <li>❌ Blurry photos ← No one trusts a blurry business</li>
+                        <li>❌ Dark photos taken at night ← Take them during the day!</li>
+                        <li>❌ Photos of random stuff ← Stay on topic (garage doors, not your lunch)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 3 -->
+        <div class="task high" data-task="task3">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task3')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">3</span> Get Your Direct Google Review Link</h3>
+                    <span class="priority-badge badge-high">⚡ HIGH</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item"><span class="meta-icon">⏱️</span> 10 minutes</div>
+                <div class="meta-item"><span class="meta-icon">💰</span> FREE</div>
+                <div class="meta-item"><span class="meta-icon">📊</span> Easier than fixing a door</div>
+            </div>
+
+            <div class="task-content">
+                <h4>💡 Why Moshe Should Care:</h4>
+                <p>You have 60 reviews. Your top competitor has 210. You need to close that gap <strong>FAST</strong>.</p>
+                <p>Every review = more trust = more calls = <strong>more money for Moshe's vacation fund</strong>. 🏖️</p>
+
+                <h4>📋 Step-by-Step:</h4>
+                <ol>
+                    <li>Open Google Business Profile app (or go to business.google.com)</li>
+                    <li>Click on "Shield Garage Doors"</li>
+                    <li>Look for <strong>"Get more reviews"</strong> or <strong>"Share review form"</strong></li>
+                    <li>Copy the link (looks like: https://g.page/r/[...]/review)</li>
+                    <li>Make it SHORTER at <a href="https://bit.ly" target="_blank">bit.ly</a> → Get something like: <strong>bit.ly/shield-review</strong></li>
+                    <li>Save this link EVERYWHERE (phone notes, email signature, text templates)</li>
+                </ol>
+
+                <h4>🎯 THE REVIEW SCRIPT (Copy & Paste This):</h4>
+                <p><strong>Text message to send after EVERY job:</strong></p>
+                <pre>Hi [Customer Name]! Thanks for choosing Shield Garage Doors today! 🚪
+
+We'd love your feedback! Please share your experience:
+👉 bit.ly/shield-review
+
+Your review helps local families find quality service.
+
+- Moshe & Team
+(704) 885-2041</pre>
+
+                <h4>🎯 THE REVIEW GAME PLAN:</h4>
+                <p><strong>GOAL:</strong> Get from 60 reviews to <strong>100 reviews in 90 days</strong> (40 new reviews)</p>
+                <ul>
+                    <li>You need <strong>3-4 reviews per week</strong></li>
+                    <li>Send the link to <strong>EVERY customer</strong> (same day as the job)</li>
+                    <li>Follow up after 3 days if they didn't review</li>
+                </ul>
+
+                <div class="alert">
+                    <div class="alert-title">🚨 MOSHE'S REVIEW MISTAKES TO AVOID:</div>
+                    <ul>
+                        <li>❌ Forgetting to ask ← <strong>ASK EVERY CUSTOMER</strong></li>
+                        <li>❌ Waiting days to ask ← Ask <strong>within 2 hours</strong> while they're happy</li>
+                        <li>❌ Not responding to reviews ← Answer ALL reviews (even bad ones)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task high" data-task="task4">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task4')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">4</span> Create Your First Google Post</h3>
+                    <span class="priority-badge badge-high">⚡ HIGH</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item"><span class="meta-icon">⏱️</span> 5 minutes</div>
+                <div class="meta-item"><span class="meta-icon">💰</span> FREE</div>
+                <div class="meta-item"><span class="meta-icon">📊</span> If you can text, you can do this</div>
+            </div>
+
+            <div class="task-content">
+                <h4>💡 Why Moshe Should Care:</h4>
+                <p>Google Posts show up in your Business Profile. They're like <strong>mini-ads that cost $0</strong>.</p>
+                <p>Customers see them when they search for you. More visibility = more calls. 📞</p>
+
+                <h4>📋 Step-by-Step:</h4>
+                <ol>
+                    <li>Open Google Business Profile app</li>
+                    <li>Tap <strong>"Posts"</strong> (or "Updates")</li>
+                    <li>Tap the <strong>"+"</strong> button</li>
+                    <li>Choose <strong>"What's New"</strong></li>
+                    <li>Copy one of these posts (I wrote them for you):</li>
+                </ol>
+
+                <pre>🚨 Emergency Garage Door Repair 24/7
+
+Garage door won't close? Spring broke? We're here to help!
+
+✅ Woman-owned & operated
+✅ Licensed & insured
+✅ Same-day service
+
+📞 Call now: (704) 885-2041
+
+#CharlotteNC #GarageDoorRepair</pre>
+
+                <ol start="6">
+                    <li>Add a photo of your truck (optional but recommended)</li>
+                    <li>Add "Call to Action" button → Choose <strong>"Call"</strong></li>
+                    <li>Tap <strong>"Publish"</strong></li>
+                    <li>Pat yourself on the back! 👏</li>
+                </ol>
+
+                <h4>📅 POSTING SCHEDULE:</h4>
+                <p>Post <strong>ONCE A WEEK</strong> (every Monday morning)</p>
+                <p>Set a reminder: <strong>"Monday 9am - Create Google Post"</strong> ⏰</p>
+            </div>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task high" data-task="task5">
+            <div class="task-header">
+                <div class="task-checkbox" onclick="toggleTask('task5')"></div>
+                <div class="task-title">
+                    <h3><span class="task-number">5</span> Check Your Business Info is Perfect</h3>
+                    <span class="priority-badge badge-high">⚡ HIGH</span>
+                </div>
+            </div>
+
+            <div class="task-meta">
+                <div class="meta-item"><span class="meta-icon">⏱️</span> 15 minutes</div>
+                <div class="meta-item"><span class="meta-icon">💰</span> FREE</div>
+                <div class="meta-item"><span class="meta-icon">📊</span> Preschool level</div>
+            </div>
+
+            <div class="task-content">
+                <h4>💡 Why Moshe Should Care:</h4>
+                <p>If your business hours are wrong, people won't call. If your phone number is wrong, you lose money.</p>
+                <p>This is <strong>BASIC but CRITICAL</strong>.</p>
+
+                <h4>📋 The NAP Rule (Copy This Exactly):</h4>
+                <pre>Name: Shield Garage Doors
+Address: 512 N College St, Unit 1807, Charlotte, NC 28202
+Phone: (704) 885-2041
+Website: https://shieldgaragedoor.com</pre>
+
+                <h4>📋 Step-by-Step:</h4>
+                <ol>
+                    <li>Go to <a href="https://business.google.com" target="_blank">business.google.com</a></li>
+                    <li>Click on "Shield Garage Doors"</li>
+                    <li>Click <strong>"Info"</strong> in the left menu</li>
+                    <li>CHECK EVERYTHING:
+                        <ul>
+                            <li>✅ Business name is exactly "Shield Garage Doors"</li>
+                            <li>✅ Address matches exactly (including "Unit 1807")</li>
+                            <li>✅ Phone is formatted: (704) 885-2041</li>
+                            <li>✅ Website is https:// (not http://)</li>
+                            <li>✅ Hours are correct</li>
+                        </ul>
+                    </li>
+                    <li>Add service area: Charlotte, Huntersville, Mooresville, Concord, Gastonia, Matthews...</li>
+                    <li>Fill in detailed business description</li>
+                    <li>Add all services: repair, installation, springs, openers, emergency</li>
+                    <li>Click <strong>"Save"</strong></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Success Banner -->
+        <div class="success-banner">
+            <h3>🎊 LEVEL 1 COMPLETE!</h3>
+            <p>Give yourself a high-five. No seriously, do it. 🙌</p>
+            <p style="margin-top: 20px; font-size: 18px; font-weight: 700;">EXPECTED RESULTS IN 30 DAYS:</p>
+            <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                <li style="margin: 8px 0;">📞 5-10 more calls per week</li>
+                <li style="margin: 8px 0;">⭐ 10-15 new reviews</li>
+                <li style="margin: 8px 0;">👀 2x more people seeing your business</li>
+            </ul>
+        </div>
+
+        <!-- Final Message -->
+        <div class="section" style="text-align: center;">
+            <h2 class="section-title">🙏 FINAL WORDS FROM YOUR COUSIN</h2>
+
+            <p style="font-size: 18px; margin: 16px 0;">Moshe, this plan <strong>WORKS</strong>. I researched your competitors, analyzed the Charlotte market, built this specifically for YOU.</p>
+
+            <p style="font-size: 18px; margin: 16px 0;">But here's the thing: <strong>You have to actually DO it.</strong></p>
+
+            <p style="font-size: 28px; font-weight: 900; color: var(--critical); margin: 32px 0;">START TODAY.</p>
+
+            <p style="font-size: 18px;">Do Task 1 right now. It'll take 30 minutes. Then Task 2 tomorrow. Then Task 3 the next day.</p>
+
+            <p style="margin-top: 24px; font-size: 18px;">Before you know it, you'll be the <strong>biggest garage door company in Charlotte</strong>.</p>
+
+            <p style="margin-top: 32px; font-size: 20px; font-weight: 700;">Your cousin believes in you. Now go make him proud! 💪</p>
+
+            <p style="margin-top: 40px; font-style: italic;">Made with ❤️ by Your Cousin<br>For Moshe | Shield Garage Doors | Charlotte, NC</p>
+
+            <p style="margin-top: 32px; font-size: 22px; font-weight: 900; color: var(--critical);">Now stop reading and GO DO TASK 1! 🚀</p>
+
+            <p style="margin-top: 24px; font-size: 14px; opacity: 0.8;">P.S. - When you hit 100 reviews and dominate Charlotte, you owe your cousin a steak dinner. Deal? 🥩</p>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="nav-bottom">
+        <a href="#task1" class="nav-btn">⬆️ Back to Top</a>
+        <a href="tel:7048852041" class="nav-btn">📞 Call Shield</a>
+    </div>
+
+    <script>
+        const tasks = ['task1', 'task2', 'task3', 'task4', 'task5'];
+
+        function loadProgress() {
+            tasks.forEach(taskId => {
+                const saved = localStorage.getItem('startHere_' + taskId);
+                if (saved === 'true') {
+                    document.querySelector(`[data-task="${taskId}"] .task-checkbox`).classList.add('checked');
+                }
+            });
+            updateProgress();
+        }
+
+        function toggleTask(taskId) {
+            const checkbox = document.querySelector(`[data-task="${taskId}"] .task-checkbox`);
+            checkbox.classList.toggle('checked');
+
+            const isChecked = checkbox.classList.contains('checked');
+            localStorage.setItem('startHere_' + taskId, isChecked);
+
+            updateProgress();
+
+            if (isChecked) {
+                const confetti = ['🎉', '🎊', '⭐', '✨', '🚀'];
+                const emoji = confetti[Math.floor(Math.random() * confetti.length)];
+
+                checkbox.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    checkbox.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        function updateProgress() {
+            let completed = 0;
+            tasks.forEach(taskId => {
+                if (localStorage.getItem('startHere_' + taskId) === 'true') {
+                    completed++;
+                }
+            });
+
+            const percentage = Math.round((completed / tasks.length) * 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+
+            let message = '';
+            if (percentage === 0) message = 'Progress: 0% - Ready to start? Let\'s go! 🚀';
+            else if (percentage < 50) message = `Progress: ${percentage}% - Keep going! You're doing great! 💪`;
+            else if (percentage < 100) message = `Progress: ${percentage}% - Almost there! Don't stop now! 🔥`;
+            else message = 'Progress: 100% - LEGEND STATUS ACHIEVED! 🎉';
+
+            document.getElementById('progressText').textContent = message;
+
+            if (percentage === 100 && !localStorage.getItem('startHere_celebration')) {
+                localStorage.setItem('startHere_celebration', 'true');
+                setTimeout(() => {
+                    alert('🎉🎉🎉 CONGRATULATIONS MOSHE!\n\nYou completed Week 1!\n\nExpect 5-10 more calls per week starting in 30 days!\n\nNow keep going with the full SEO plan! 💪');
+                }, 500);
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        loadProgress();
+
+        if (!localStorage.getItem('startHere_welcomeShown')) {
+            setTimeout(() => {
+                alert('🎉 Welcome Moshe!\n\nThis is your SIMPLE, FUN guide to dominating Charlotte.\n\nStart with Task 1 right now - it only takes 30 minutes!\n\nLet\'s make you LEGENDARY! 🚀');
+                localStorage.setItem('startHere_welcomeShown', 'true');
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
